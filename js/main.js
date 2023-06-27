@@ -94,19 +94,3 @@ const createPhotoDescription = () => {
 
 Array.from({length: USER_PHOTO_COUNT}, createPhotoDescription);
 
-const PHOTO_DESCRIPTION = [
-  'Хороший свет',
-  'Неожиданный ракурс',
-  'Хорошее решение',
-  'Ранним утром'
-
-];
-
-const NAMES = [
-  'Карлсон',
-  'Том Сойер',
-  'Старик Хоттабыч',
-  'Змей Горыныч',
-  'Алёнушка',
-  'Илья Муромец'
-];
