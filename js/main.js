@@ -1,3 +1,4 @@
 import { createPhotoDescriptions } from '/js/data.js';
 
-createPhotoDescriptions();
+let a = createPhotoDescriptions();
+console.log(a);
