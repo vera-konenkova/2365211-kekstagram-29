@@ -1,4 +1,5 @@
-// JavaScript Document
+import { getRandomInteger, getRandomArrayElement,createRandomNumberFromRangeGenerator } from '/js/util.js';
+
 const USER_PHOTO_COUNT = 25;
 
 const COMMENTS_COUNT = 30;
@@ -8,7 +9,6 @@ const PHOTO_DESCRIPTION = [
   'Неожиданный ракурс',
   'Хорошее решение',
   'Ранним утром'
-
 ];
 
 const NAMES = [
@@ -29,49 +29,24 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
-};
-
-const createRandomNumberFromRangeGenerator = (min, max) => {
-  const previousValues = [];
-
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-
-    if (previousValues.length >= max - min + 1) {
-      return null;
-    }
-
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-
-    return currentValue;
-  };
-};
-
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
-
 const generatePhotoId = createRandomNumberFromRangeGenerator(1, 25);
 const generateUrlId = createRandomNumberFromRangeGenerator(1, 25);
 const generateCommentId = createRandomNumberFromRangeGenerator(1, 500);
 const generateAvatarId = createRandomNumberFromRangeGenerator(1, 6);
 
-const createComment = () => {
-  const id = generateCommentId();
-  const avatarId = generateAvatarId();
+const generateMessage = () => {
   const messageCount = getRandomInteger(1, 2);
-  let message = [];
+  const message = [];
   for (let i = 0; i <= messageCount; i++){
     message.push(getRandomArrayElement(MESSAGES));
   }
-  message = message.join(' ');
+  return message.join(' ');
+};
+
+const createComment = () => {
+  const id = generateCommentId();
+  const avatarId = generateAvatarId();
+  const message = generateMessage();
   return {
     id: id,
     avatar: `img/avatar-${avatarId}.svg`,
@@ -92,5 +67,5 @@ const createPhotoDescription = () => {
   };
 };
 
-let a = Array.from({length: USER_PHOTO_COUNT}, createPhotoDescription);
-console.log(a);
+const createPhotoDescriptions = () => Array.from({length: USER_PHOTO_COUNT}, createPhotoDescription);
+export {createPhotoDescriptions};
