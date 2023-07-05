@@ -17,7 +17,6 @@ const renderThumbnails = (pictures) => {
   const fragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
   const thumbnail = createThubmnail(picture);
-  console.log(thumbnail);
   fragment.appendChild(thumbnail);
 
 });
