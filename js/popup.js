@@ -1,20 +1,37 @@
 import { createPhotoDescriptions } from '/js/data.js';
 import { renderThumbnails } from '/js/thumbnail.js';
-let photo = renderThumbnails(createPhotoDescriptions());
 import {pressEscButton} from '/js/util.js';
+import {showFullPicture} from '/js/full-picture.js;'
+renderThumbnails(createPhotoDescriptions());
+
+// поиск картинки
+const container = document.querySelector('.pictures');
+const findPicture = (pictures) => {
+  container.addEventListener('click', (evt) => {
+    const thumbnail = evt.target.closest('[data-thumbnail-id]');
+    if (!thumbnail) {
+    return;
+    }
+    const picture = pictures.find(
+      (item) => item.id === +thumbnail.dataset.thumbnailId
+    );
+
+  });
+  return picture;
+};
+
 
 //popup
 const popUp = document.querySelector('.big-picture');
 const miniPicture = document.querySelectorAll('.picture');
 const escButton = document.querySelector('.big-picture__cancel');
 
-//содержимое popup
-const bigPictureImage = document.querySelector('.big-picture__img');
-const bigPicturesLikes = document.querySelector('.likes-count');
-
+popup = ()=> {
 miniPicture.forEach((photo) => { // открываем фото
   photo.addEventListener ('click', ()  => {
-    popUp.classList.remove('hidden');
+  popUp.classList.remove('hidden');
+  const foundPhoto = findPicture(photo);
+  showFullPicture(foundPhoto);
   });
 });
 
@@ -29,3 +46,5 @@ document.addEventListener('keydown', (evt) => { // закрываем фото �
   }
 
 });
+};
+export {popup}
