@@ -1,9 +1,8 @@
-import { createPhotoDescriptions } from '/js/data.js';
-import { renderThumbnails } from '/js/thumbnail.js';
 import {pressEscButton} from '/js/util.js';
 import {showFullPicture} from '/js/full-picture.js;'
+import {renderThumbnails} from '/js/thumbnail.js';
+import { createPhotoDescriptions } from '/js/data.js';
 renderThumbnails(createPhotoDescriptions());
-
 // поиск картинки
 const container = document.querySelector('.pictures');
 const findPicture = (pictures) => {
@@ -12,12 +11,13 @@ const findPicture = (pictures) => {
     if (!thumbnail) {
     return;
     }
+    evt.preventDefault();
     const picture = pictures.find(
       (item) => item.id === +thumbnail.dataset.thumbnailId
     );
-
+      showBigPicture(picture);
   });
-  return picture;
+  renderThubnails(pictures);
 };
 
 
@@ -26,7 +26,7 @@ const popUp = document.querySelector('.big-picture');
 const miniPicture = document.querySelectorAll('.picture');
 const escButton = document.querySelector('.big-picture__cancel');
 
-popup = ()=> {
+
 miniPicture.forEach((photo) => { // открываем фото
   photo.addEventListener ('click', ()  => {
   popUp.classList.remove('hidden');
@@ -46,5 +46,5 @@ document.addEventListener('keydown', (evt) => { // закрываем фото �
   }
 
 });
-};
-export {popup}
+
+export {miniPicture};

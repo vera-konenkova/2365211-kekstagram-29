@@ -26,5 +26,4 @@ const pressEscButton = (evt) => evt.key === 'Escape';
 
 const createDOMFragment = (str) => new Range().createContextualFragment(str);
 
-
 export {getRandomInteger, createRandomNumberFromRangeGenerator, getRandomArrayElement, pressEscButton, createDOMFragment};
