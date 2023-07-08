@@ -1,52 +1,66 @@
-import { createDOMFragment } from '/js/util.js';
+const bigPictureElement = document.querySelector('.big-picture');
+const commentCountElement = bigPictureElement.querySelector('.social__comments-count');
+const commentListElement = bigPictureElement.querySelector('.social__comments');
+const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
+const bodyElement = documentQ.qerySelector('body');
+const cancelButtonElement = bigPictureElement.querySelector('big-picture__cancel');
+const commentElement = document.querySelector('#comment').textContent.queryselector('big-picture__social');
 
-const previewBoxElement = document.querySelector('.big-picture__preview');
-const bigPictureElement = previewBoxElement.firstElementChild.children[0];
-const likesCountElement = previewBoxElement.querySelector('.likes-count');
-const commentsCountElement = previewBoxElement.querySelector('.comments-count');
-const socialCaptionElement = previewBoxElement.querySelector('.social__caption');
-//const socialCommentCountElement = document.querySelector('.social__comment-count');
-//const commentsLoaderElement = previewBoxElement.querySelector('.comments-loader');
-const commentTemplateString = `
-  <li class="social__comment">
-    <img
-        class="social__picture"
-        src="{{аватар}}"
-        alt="{{имя комментатора}}"
-        width="35" height="35">
-    <p class="social__text">{{текст комментария}}</p>
-  </li>
-`;
+const createComment = ({avatar, name, message}) => {
+  const comment = commentElement.cloneNode(true);
+  comment.querySelector('.social__picture').src = avatar;
+  comment.querySelector('.social__picture').alt = name;
+  comment.querySelector('.social__text').textContent = message;
+  return comment;
+};
 
-const addComments = (comments) => {
-  const commentListFragment = document.createDocumentFragment();
+const renderComments = (comments) => {
+ commentListElement.innerHTML = '';
 
-  comments.forEach((comment) => {
-    const newCommentElement = createDOMFragment(commentTemplateString);
-    const imgEl = newCommentElement.querySelector('.social__picture');
-    imgEl.src = comment.avatar;
-    imgEl.alt = comment.message;
-
-    newCommentElement.querySelector('.social__text').textContent = comment.message;
-    commentListFragment.appendChild(newCommentElement);
+const fragment = document.createDocumentFragment();
+  comments.forEach(item) => {
+  const comment = createComment(item);
+  fragment.append(comment);
   });
 
-  return commentListFragment;
+  commentListElement.append(fragment);
 };
 
-const showFullPicture = ({ url, likes, comments, description }) => {
-  const socialCommentsBoxElement = previewBoxElement.querySelector('.social__comments');
-  socialCommentsBoxElement.innerHTML = '';
-
-  bigPictureElement.src = url;
-  likesCountElement.textContent = likes;
-  commentsCountElement.textContent = comments.length;
-
-  const commentListFragment = addComments(comments);
-  socialCommentsBoxElement.append(commentListFragment);
-
-  socialCaptionElement.textContent = description;
+const hideBigPicture = () => {
+  bigPictureElement.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
+  document.removeEventListener('keydown', onDocumentKeydown);
 };
 
+function onDocumentKeydown(evt) {
+ if (evt.key === 'Escape') {
+  evt.preventDefault();
+  hideBigPicture();
+  }
+ }
 
-export {showFullPicture};
+ const onCancelButtonClick = () => {
+  hideBigPicture();
+ }
+
+ const renderPictureDetails = ({ url, likes, description}) => {
+  bigPictureElement.querySelector('.big-picture__img img').src = url;
+  bigPictureElement.querySelector('.big-picture__img img').alt = description;
+  bigPictureElement.querySelector('.likes-count').textContent = likes;
+  bigPictureElement.querySelector('.social__caption').textContent = description;
+ };
+
+const showBigPicture = (data) => {
+  bigPictureElement.classList.remove('hidden');
+  bodyElement.classList.add('modal-open');
+  commentsLoaderElement.classList.add('hidden');
+  commentCountElement.classList.add('hidden');
+  document.addEventListener('keydown', onDocumentKeydown);
+
+  renderPictureDetails(data);
+  renderComments(data.comments);
+};
+
+cancelButtonElement.addEventListener('click', onCancelButtonClick);
+
+export { showBigPicture };
