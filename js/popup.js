@@ -1,13 +1,12 @@
 import {renderThumbnails} from '/js/thumbnail.js';
-import {showBigPicture} from '/js/full-picture.js;'
-import {createPhotoDescriptions} from '/js/data.js'
+import {showBigPicture} from '/js/full-picture.js';
+import {createPhotoDescriptions} from '/js/data.js';
 
 renderThumbnails (createPhotoDescriptions);
 
-
-
 // поиск картинки
 const container = document.querySelector('.pictures');
+
 const findPicture = (pictures) => {
   container.addEventListener('click', (evt) => {
     const thumbnail = evt.target.closest('[data-thumbnail-id]');
@@ -23,4 +22,5 @@ const findPicture = (pictures) => {
   renderThubnails (pictures);
 };
 
-export (findPicture);
+
+export {findPicture};

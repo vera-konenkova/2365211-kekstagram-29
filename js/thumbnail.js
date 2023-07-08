@@ -13,11 +13,11 @@ const createThubmnail = ({ comments, description, likes, url, id }) => {
   return thumbnail;
 }
 
-const renderThumbnails = (pictures, container) => {
+const renderThumbnails = (pictures) => {
   const fragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
   const thumbnail = createThubmnail(picture);
-  fragment.appendChild(thumbnail);
+  fragment.append(thumbnail);
 
 });
 container.append(fragment);

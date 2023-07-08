@@ -2,9 +2,8 @@ const bigPictureElement = document.querySelector('.big-picture');
 const commentCountElement = bigPictureElement.querySelector('.social__comments-count');
 const commentListElement = bigPictureElement.querySelector('.social__comments');
 const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
-const bodyElement = documentQ.qerySelector('body');
-const cancelButtonElement = bigPictureElement.querySelector('big-picture__cancel');
-const commentElement = document.querySelector('#comment').textContent.queryselector('big-picture__social');
+const bodyElement = document.querySelector('body');
+const cancelButtonElement = bigPictureElement.querySelector('big-picture__cancel'); const commentElement = document.querySelector('social__comments').textContent.querySelector('big-picture__social');
 
 const createComment = ({avatar, name, message}) => {
   const comment = commentElement.cloneNode(true);
@@ -18,7 +17,7 @@ const renderComments = (comments) => {
  commentListElement.innerHTML = '';
 
 const fragment = document.createDocumentFragment();
-  comments.forEach(item) => {
+  comments.forEach((item) => {
   const comment = createComment(item);
   fragment.append(comment);
   });
@@ -60,7 +59,6 @@ const showBigPicture = (data) => {
   renderPictureDetails(data);
   renderComments(data.comments);
 };
-
-cancelButtonElement.addEventListener('click', onCancelButtonClick);
+ cancelButtonElement.addEventListener('click', onCancelButtonClick);
 
 export { showBigPicture };
