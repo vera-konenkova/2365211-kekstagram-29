@@ -47,15 +47,18 @@ const createComment = () => {
   const id = generateCommentId();
   const avatarId = generateAvatarId();
   const message = generateMessage();
+  console.log('img/avatar-${avatarId}.svg');
   return {
     id: id,
     avatar: `img/avatar-${avatarId}.svg`,
     message: message,
     name: getRandomArrayElement(NAMES)
+
   };
+
 };
 
-const createPhotoDescription = () => {
+const test = () => {
   const id = generatePhotoId();
   const urlId = generateUrlId();
   return{
@@ -67,6 +70,10 @@ const createPhotoDescription = () => {
   };
 };
 
-const createPhotoDescriptions = () => Array.from({length: USER_PHOTO_COUNT}, createPhotoDescription);
+const createPhotoDescriptions = () => Array.from({length: USER_PHOTO_COUNT}, test);
+
+const listOfPhotoDescriptions =   createPhotoDescriptions()
+
+export {listOfPhotoDescriptions}
 
 export {createPhotoDescriptions};

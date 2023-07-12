@@ -1,5 +1,4 @@
+import { findPicture, pictures } from '/js/popup.js';
 
-import { findPicture } from '/js/popup.js';
-
-findPicture;
+findPicture(pictures);
 
