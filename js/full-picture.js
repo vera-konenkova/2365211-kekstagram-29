@@ -8,7 +8,6 @@ const cancelButtonElement = bigPictureElement.querySelector('.big-picture__cance
 
 const createComment = ({avatar, name, message}) => {
   const comment = commentElement.cloneNode(true);
-  console.log(avatar);
   comment.querySelector('.social__picture').src = avatar;
   comment.querySelector('.social__picture').alt = name;
   comment.querySelector('.social__text').textContent = message;
@@ -28,7 +27,6 @@ const fragment = document.createDocumentFragment();
 
   });
   commentListElement.append(fragment);
- console.log(commentListElement);
 };
 
 const hideBigPicture = () => {

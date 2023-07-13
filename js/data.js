@@ -47,7 +47,6 @@ const createComment = () => {
   const id = generateCommentId();
   const avatarId = generateAvatarId();
   const message = generateMessage();
-  console.log('img/avatar-${avatarId}.svg');
   return {
     id: id,
     avatar: `img/avatar-${avatarId}.svg`,
