@@ -1,5 +1,10 @@
+import { renderThumbnails } from '/js/thumbnail.js';
+import { listOfPhotoDescriptions } from './data.js';
+
+renderThumbnails(listOfPhotoDescriptions);
+
 const bigPictureElement = document.querySelector('.big-picture');
-const commentCountElement = bigPictureElement.querySelector('.social__comments-count');
+const commentCountElement = bigPictureElement.querySelector('.comments-count');
 const commentListElement = bigPictureElement.querySelector('.social__comments');
 const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
 const bodyElement = document.querySelector('body');
@@ -59,11 +64,30 @@ const showBigPicture = (data) => {
   commentsLoaderElement.classList.add('hidden');
   //commentCountElement.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
-
   renderPictureDetails(data);
   renderComments(data.comments);
-};
+  };
 
-cancelButtonElement.addEventListener('click', onCancelButtonClick);
+  cancelButtonElement.addEventListener('click', onCancelButtonClick);
 
-export { showBigPicture };
+  // поиск картинки
+ const container = document.querySelector('.pictures');
+
+ const findPicture = (listOfPhoto) => {
+   container.addEventListener('click', (evt) => {
+     const thumbnail = evt.target.closest('[data-thumbnail-id]');
+     if (!thumbnail) {
+     return;
+     }
+     evt.preventDefault();
+
+     const picture = listOfPhoto.find(
+       (item) => item.id === +thumbnail.dataset.thumbnailId
+     );
+    showBigPicture(picture);
+   });
+ };
+ const pictures = listOfPhotoDescriptions;
+
+
+export { pictures, findPicture };

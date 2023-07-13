@@ -10,7 +10,7 @@ const createRandomNumberFromRangeGenerator = (min, max) => {
   return function () {
     let currentValue = getRandomInteger(min, max);
     if (previousValues.length >= max - min + 1) {
-      return null;
+      previousValues.length = 0;
     }
     while (previousValues.includes(currentValue)) {
       currentValue = getRandomInteger(min, max);
