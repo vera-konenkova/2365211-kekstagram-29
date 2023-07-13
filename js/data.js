@@ -57,7 +57,7 @@ const createComment = () => {
 
 };
 
-const test = () => {
+const createPhotoDescriptions = () => {
   const id = generatePhotoId();
   const urlId = generateUrlId();
   return{
@@ -65,13 +65,13 @@ const test = () => {
     url: `photos/${urlId}.jpg`,
     description: getRandomArrayElement(PHOTO_DESCRIPTION),
     likes: getRandomInteger(15, 200),
-    comments: Array.from({length: COMMENTS_COUNT}, createComment)
+    comments: Array.from({length: getRandomInteger(1, COMMENTS_COUNT)}, createComment)
   };
 };
 
-const createPhotoDescriptions = () => Array.from({length: USER_PHOTO_COUNT}, test);
+const arrayOfDiscription = () => Array.from({length: USER_PHOTO_COUNT}, createPhotoDescriptions);
 
-const listOfPhotoDescriptions =   createPhotoDescriptions()
+const listOfPhotoDescriptions =   arrayOfDiscription()
 
 export {listOfPhotoDescriptions}
 
