@@ -3,6 +3,8 @@ import { listOfPhotoDescriptions } from './data.js';
 
 renderThumbnails(listOfPhotoDescriptions);
 
+let COMMENT_PORTION = 5;
+
 const bigPictureElement = document.querySelector('.big-picture');
 const commentCountElement = bigPictureElement.querySelector('.comments-count');
 const commentListElement = bigPictureElement.querySelector('.social__comments');
@@ -10,6 +12,7 @@ const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader'
 const bodyElement = document.querySelector('body');
 const commentElement = document.querySelector('#comment').content;
 const cancelButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
+
 
 const createComment = ({avatar, name, message}) => {
   const comment = commentElement.cloneNode(true);
@@ -19,20 +22,41 @@ const createComment = ({avatar, name, message}) => {
   return comment;
 };
 
-const renderComments = (comments) => {
+  let comments = [];
 
-commentListElement.innerHTML = '' ;
+  const fragment = document.createDocumentFragment();
 
-const fragment = document.createDocumentFragment();
-  comments.forEach((item) => {
-  const comment = createComment(item);
-  fragment.append(comment);
+      const createComments = () => {
+    comments.forEach((item) => {
+      const comment = createComment(item);
+      fragment.append(comment);
+        });
+    return comments = commentListElement.append(fragment);
+    };
+console.log(comments);
+  const fragment2 = document.createDocumentFragment();
 
-    //commentListElement.append(fragment);
+  const renderComments = () => {
+    console.log(comments);
+    let j = 0;
+      if (j >= comments.length) {
+        commentsLoaderElement.classList.add('hidden');
+        commentsShown = comments.lenght;
+      } else {
 
-  });
-  commentListElement.append(fragment);
-};
+    let commentsShown = 0;
+
+    for (let i=0; i < Math.ceil(comments.length/COMMENT_PORTION + 1); i++){
+      const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
+        commentsShown += COMMENT_PORTION;
+        commentListElement.innerHTML = '' ;
+        commentsLoaderElement.classList.remove('hidden');
+        fragment2.append(commentPortion);
+        commentCountElement.textcontent = commentsShown;
+      return commentListElement.append(fragment2);
+     };
+    }
+  }
 
 const hideBigPicture = () => {
   bigPictureElement.classList.add('hidden');
@@ -47,9 +71,8 @@ function onDocumentKeydown(evt) {
   }
  }
 
- const onCancelButtonClick = () => {
-  hideBigPicture();
- }
+ const onCommentsLoaderClick = () => renderComments();
+ const onCancelButtonClick = () => hideBigPicture();
 
  const renderPictureDetails = ({ url, likes, description}) => {
   bigPictureElement.querySelector('.big-picture__img img').src = url;
@@ -62,13 +85,17 @@ const showBigPicture = (data) => {
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   commentsLoaderElement.classList.add('hidden');
-  //commentCountElement.classList.add('hidden');
+  commentCountElement.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
-  renderPictureDetails(data);
-  renderComments(data.comments);
-  };
 
-  cancelButtonElement.addEventListener('click', onCancelButtonClick);
+
+  renderPictureDetails(data);
+  createComments(data);
+  console.log(data);
+  if (comments.length > 0){
+    renderComments(data);
+  }
+};
 
   // поиск картинки
  const container = document.querySelector('.pictures');
@@ -87,7 +114,10 @@ const showBigPicture = (data) => {
     showBigPicture(picture);
    });
  };
+
  const pictures = listOfPhotoDescriptions;
 
+  cancelButtonElement.addEventListener('click', onCancelButtonClick);
+  commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
 
-export { pictures, findPicture };
+export { pictures, findPicture};
