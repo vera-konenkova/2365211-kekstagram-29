@@ -32,21 +32,21 @@ const createComment = ({avatar, name, message}) => {
       fragment.append(comment);
         });
     return comments = commentListElement.append(fragment);
+
     };
 
   const fragment2 = document.createDocumentFragment();
 
-  const renderComments = (com) => {
-    createComments(com);
-    let j = 0;
-    let commentsShown = 0;
-      if (j >= comments.length) {
-        commentsLoaderElement.classList.add('hidden');
-        commentsShown = comments.lenght;
-        console.log(comments.lenght);
-      } else {
-
-    for (let i=0; i < Math.ceil(comments.length/COMMENT_PORTION + 1); i++){
+  const renderComments = (comments) => {
+    // let j = 0;
+    // let commentsShown = 0;
+      // if (j >= comments.length) {
+      //   commentsLoaderElement.classList.add('hidden');
+      //   commentsShown = comments.lenght;
+      //   console.log(comments.lenght);
+      // } else {
+      let  commentsShown = comments.lenght;
+    for (let i=0; i < Math.ceil(commentsShown/COMMENT_PORTION + 1); i++){
       const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
         commentsShown += COMMENT_PORTION;
         commentListElement.innerHTML = '' ;
@@ -55,7 +55,7 @@ const createComment = ({avatar, name, message}) => {
         commentCountElement.textcontent = commentsShown;
       return commentListElement.append(fragment2);
      };
-    }
+    // }
   }
 
 const hideBigPicture = () => {
@@ -90,12 +90,12 @@ const showBigPicture = (data) => {
 
 
   renderPictureDetails(data);
-  createComments(data);
+  createComments(data.comments);
   console.log(data);
   console.log(data.comments);
+
   if (data.comments.length > 0){
     renderComments(data.comments);
-
   }
 };
 
