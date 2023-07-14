@@ -23,28 +23,28 @@ const createComment = ({avatar, name, message}) => {
 };
 
   let comments = [];
-
+  let commen = [];
   const fragment = document.createDocumentFragment();
 
       const createComments = () => {
-    comments.forEach((item) => {
+    commen.forEach((item) => {
       const comment = createComment(item);
       fragment.append(comment);
         });
     return comments = commentListElement.append(fragment);
     };
-console.log(comments);
+
   const fragment2 = document.createDocumentFragment();
 
-  const renderComments = () => {
-    console.log(comments);
+  const renderComments = (com) => {
+    createComments(com);
     let j = 0;
+    let commentsShown = 0;
       if (j >= comments.length) {
         commentsLoaderElement.classList.add('hidden');
         commentsShown = comments.lenght;
+        console.log(comments.lenght);
       } else {
-
-    let commentsShown = 0;
 
     for (let i=0; i < Math.ceil(comments.length/COMMENT_PORTION + 1); i++){
       const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
@@ -92,8 +92,10 @@ const showBigPicture = (data) => {
   renderPictureDetails(data);
   createComments(data);
   console.log(data);
-  if (comments.length > 0){
-    renderComments(data);
+  console.log(data.comments);
+  if (data.comments.length > 0){
+    renderComments(data.comments);
+
   }
 };
 
