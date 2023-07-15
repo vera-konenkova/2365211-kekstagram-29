@@ -23,29 +23,34 @@ const createComment = ({avatar, name, message}) => {
 };
 
   let comments = [];
-  let commen = [];
+  let comms = [];
   const fragment = document.createDocumentFragment();
 
-      const createComments = () => {
+      const createComments = (commen) => {
     commen.forEach((item) => {
       const comment = createComment(item);
       fragment.append(comment);
         });
-    return comments = commentListElement.append(fragment);
+    return comms = commentListElement.append(fragment);
 
     };
 
   const fragment2 = document.createDocumentFragment();
 
   const renderComments = (comments) => {
-    // let j = 0;
-    // let commentsShown = 0;
-      // if (j >= comments.length) {
-      //   commentsLoaderElement.classList.add('hidden');
-      //   commentsShown = comments.lenght;
-      //   console.log(comments.lenght);
-      // } else {
-      let  commentsShown = comments.lenght;
+    console.log(comments.length);
+      commentListElement.innerHTML = '' ;
+
+      const fragment2 = document.createDocumentFragment();
+        comments.forEach((item) => {
+        const comment = createComment(item);
+        fragment.append(comment);
+        });
+        commentListElement.append(fragment2);
+      };
+
+      let commentsShown = comments.lenght;
+
     for (let i=0; i < Math.ceil(commentsShown/COMMENT_PORTION + 1); i++){
       const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
         commentsShown += COMMENT_PORTION;
@@ -53,10 +58,10 @@ const createComment = ({avatar, name, message}) => {
         commentsLoaderElement.classList.remove('hidden');
         fragment2.append(commentPortion);
         commentCountElement.textcontent = commentsShown;
-      return commentListElement.append(fragment2);
+      commentListElement.append(fragment2);
      };
     // }
-  }
+
 
 const hideBigPicture = () => {
   bigPictureElement.classList.add('hidden');
@@ -88,14 +93,11 @@ const showBigPicture = (data) => {
   commentCountElement.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
 
-
   renderPictureDetails(data);
-  createComments(data.comments);
-  console.log(data);
-  console.log(data.comments);
+ createComments(data.comments);
 
   if (data.comments.length > 0){
-    renderComments(data.comments);
+    renderComments(comms);
   }
 };
 
