@@ -22,46 +22,38 @@ const createComment = ({avatar, name, message}) => {
   return comment;
 };
 
-  let comments = [];
-  let comms = [];
-  const fragment = document.createDocumentFragment();
+  // let comments = [];
+  // let comms = [];
+  // const fragment = document.createDocumentFragment();
 
-      const createComments = (commen) => {
-    commen.forEach((item) => {
-      const comment = createComment(item);
-      fragment.append(comment);
-        });
-    return comms = commentListElement.append(fragment);
+  //     const createComments = (comment) => {
+  //   commen.forEach((item) => {
+  //     const comment = createComment(item);
+  //     fragment.append(comment);
+  //       });
+  //   return comms = commentListElement.append(fragment);
 
-    };
-
-  const fragment2 = document.createDocumentFragment();
+  //   };
 
   const renderComments = (comments) => {
-    console.log(comments.length);
-      commentListElement.innerHTML = '' ;
 
-      const fragment2 = document.createDocumentFragment();
-        comments.forEach((item) => {
-        const comment = createComment(item);
-        fragment.append(comment);
-        });
-        commentListElement.append(fragment2);
-      };
+    let commentsShown = 0;
+    const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
+    commentsShown += COMMENT_PORTION;
+     console.log(commentPortion);
 
-      let commentsShown = comments.lenght;
-
-    for (let i=0; i < Math.ceil(commentsShown/COMMENT_PORTION + 1); i++){
-      const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
-        commentsShown += COMMENT_PORTION;
+        const fragment = document.createDocumentFragment();
         commentListElement.innerHTML = '' ;
         commentsLoaderElement.classList.remove('hidden');
-        fragment2.append(commentPortion);
-        commentCountElement.textcontent = commentsShown;
-      commentListElement.append(fragment2);
-     };
-    // }
-
+        commentCountElement.textcontent = 23;
+          commentPortion.forEach((item) => {
+           const comment = createComment(item);
+            fragment.append(comment);
+           });
+      fragment.append(comments);
+      console.log(fragment);
+      commentListElement.append(fragment);
+    };
 
 const hideBigPicture = () => {
   bigPictureElement.classList.add('hidden');
@@ -94,10 +86,19 @@ const showBigPicture = (data) => {
   document.addEventListener('keydown', onDocumentKeydown);
 
   renderPictureDetails(data);
- createComments(data.comments);
+  let comments = data.comments;
+  //const commentPortion = a.slice(0, 6);
+  console.log(comments);
+
+    // let commentsShown = 0;
+    // const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
+    // commentsShown += COMMENT_PORTION;
+    //  console.log(commentPortion);
+
 
   if (data.comments.length > 0){
-    renderComments(comms);
+
+    renderComments(data.comments);
   }
 };
 
