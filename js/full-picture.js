@@ -35,14 +35,17 @@ const createComment = ({avatar, name, message}) => {
   //   };
 
   const renderComments = (comments) => {
-    let commentsShown = 0;
-    if (commentsShown > comments.length) {
+    const l = comments.length;
+    for ( let commentsShown = 1; commentsShown < Math.ceil(l/COMMENT_PORTION+1); commentsShown++){
+
+    if (commentsShown > l) {
       commentsLoaderElement.classList.add('hidden');
     } else {
       commentsLoaderElement.classList.remove('hidden');
 
-    console.log(comments.length);
-    commentCountElement.Textcontent = comments.length;
+    console.log(l);
+    commentCountElement.Textcontent = l;
+
     const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
     commentsShown += COMMENT_PORTION;
      console.log(commentPortion);
@@ -54,10 +57,11 @@ const createComment = ({avatar, name, message}) => {
            const comment = createComment(item);
             fragment.append(comment);
            });
-      fragment.append(comment);
 
       commentListElement.append(fragment);
     };
+
+
     commentCountElement.textContent = comments.length;
 
     if (commentsShown >= comments.length) {
@@ -65,7 +69,7 @@ const createComment = ({avatar, name, message}) => {
     } else {
       commentsLoaderElement.classList.remove('hidden');
     }
-
+  };
     };
 
 const hideBigPicture = () => {
@@ -104,10 +108,22 @@ const showBigPicture = (data) => {
   //const commentPortion = a.slice(0, 6);
   console.log(comments);
 
+  const commentPortion1 = comments.slice(0, COMMENT_PORTION);
+
+  const fragment = document.createDocumentFragment();
+  commentListElement.innerHTML = '' ;
+    commentPortion1.forEach((item) => {
+     const comment = createComment(item);
+      fragment.append(comment);
+     });
+commentListElement.append(fragment);
+
   if (data.comments.length > 0){
 
-    renderComments(data.comments);
+    renderComments(data.comments, data.comments.length);
   }
+
+
 
 };
 
