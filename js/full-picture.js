@@ -13,7 +13,6 @@ const bodyElement = document.querySelector('body');
 const commentElement = document.querySelector('#comment').content;
 const cancelButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
 
-
 const createComment = ({avatar, name, message}) => {
   const comment = commentElement.cloneNode(true);
   comment.querySelector('.social__picture').src = avatar;
@@ -36,16 +35,21 @@ const createComment = ({avatar, name, message}) => {
   //   };
 
   const renderComments = (comments) => {
-
     let commentsShown = 0;
+    if (commentsShown > comments.length) {
+      commentsLoaderElement.classList.add('hidden');
+    } else {
+      commentsLoaderElement.classList.remove('hidden');
+
+    console.log(comments.length);
+    commentCountElement.Textcontent = comments.length;
     const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
     commentsShown += COMMENT_PORTION;
      console.log(commentPortion);
+     console.log(commentsShown);
 
         const fragment = document.createDocumentFragment();
         commentListElement.innerHTML = '' ;
-        commentsLoaderElement.classList.remove('hidden');
-        commentCountElement.textcontent = 23;
           commentPortion.forEach((item) => {
            const comment = createComment(item);
             fragment.append(comment);
@@ -53,6 +57,15 @@ const createComment = ({avatar, name, message}) => {
       fragment.append(comments);
       console.log(fragment);
       commentListElement.append(fragment);
+    };
+    commentCountElement.textContent = comments.length;
+
+    if (commentsShown >= comments.length) {
+      commentsLoaderElement.classList.add('hidden');
+    } else {
+      commentsLoaderElement.classList.remove('hidden');
+    }
+
     };
 
 const hideBigPicture = () => {
@@ -81,8 +94,7 @@ function onDocumentKeydown(evt) {
 const showBigPicture = (data) => {
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-  commentsLoaderElement.classList.add('hidden');
-  commentCountElement.classList.add('hidden');
+
   document.addEventListener('keydown', onDocumentKeydown);
 
   renderPictureDetails(data);
@@ -90,16 +102,11 @@ const showBigPicture = (data) => {
   //const commentPortion = a.slice(0, 6);
   console.log(comments);
 
-    // let commentsShown = 0;
-    // const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
-    // commentsShown += COMMENT_PORTION;
-    //  console.log(commentPortion);
-
-
   if (data.comments.length > 0){
 
     renderComments(data.comments);
   }
+
 };
 
   // поиск картинки
