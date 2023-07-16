@@ -54,8 +54,8 @@ const createComment = ({avatar, name, message}) => {
            const comment = createComment(item);
             fragment.append(comment);
            });
-      fragment.append(comments);
-      console.log(fragment);
+      fragment.append(comment);
+
       commentListElement.append(fragment);
     };
     commentCountElement.textContent = comments.length;
@@ -81,7 +81,9 @@ function onDocumentKeydown(evt) {
   }
  }
 
- const onCommentsLoaderClick = () => renderComments();
+  const onCommentsLoaderClick = () => renderComments();
+
+
  const onCancelButtonClick = () => hideBigPicture();
 
  const renderPictureDetails = ({ url, likes, description}) => {
