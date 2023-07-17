@@ -7,6 +7,7 @@ let COMMENT_PORTION = 5;
 
 const bigPictureElement = document.querySelector('.big-picture');
 const commentCountElement = bigPictureElement.querySelector('.comments-count');
+const commentCount = bigPictureElement.querySelector('.social__comment-count');
 const commentListElement = bigPictureElement.querySelector('.social__comments');
 const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
 const bodyElement = document.querySelector('body');
@@ -21,32 +22,18 @@ const createComment = ({avatar, name, message}) => {
   return comment;
 };
 
-  // let comments = [];
-  // let comms = [];
-  // const fragment = document.createDocumentFragment();
-
-  //     const createComments = (comment) => {
-  //   commen.forEach((item) => {
-  //     const comment = createComment(item);
-  //     fragment.append(comment);
-  //       });
-  //   return comms = commentListElement.append(fragment);
-
-  //   };
-
   const renderComments = (comments) => {
     const l = comments.length;
-    for ( let commentsShown = 1; commentsShown < Math.ceil(l/COMMENT_PORTION+1); commentsShown++){
-
+    //for ( let commentsShown = 1; commentsShown < Math.ceil(l/COMMENT_PORTION+1); commentsShown++){
+      let commentsShown = COMMENT_PORTION;
     if (commentsShown > l) {
       commentsLoaderElement.classList.add('hidden');
     } else {
       commentsLoaderElement.classList.remove('hidden');
 
-    console.log(l);
-    commentCountElement.Textcontent = l;
-
-    const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
+      commentCount.textContent = COMMENT_PORTION + ' из ' + comments.length + ' комментариев '
+    console.log(commentCountElement.textContent);
+        const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
     commentsShown += COMMENT_PORTION;
      console.log(commentPortion);
      console.log(commentsShown);
@@ -59,17 +46,12 @@ const createComment = ({avatar, name, message}) => {
            });
 
       commentListElement.append(fragment);
+
+     onCommentsLoaderClick = () => renderComments(comments);
+
+
     };
-
-
-    commentCountElement.textContent = comments.length;
-
-    if (commentsShown >= comments.length) {
-      commentsLoaderElement.classList.add('hidden');
-    } else {
-      commentsLoaderElement.classList.remove('hidden');
-    }
-  };
+  //};
     };
 
 const hideBigPicture = () => {
@@ -84,11 +66,6 @@ function onDocumentKeydown(evt) {
   hideBigPicture();
   }
  }
-
-  const onCommentsLoaderClick = () => renderComments();
-
-
- const onCancelButtonClick = () => hideBigPicture();
 
  const renderPictureDetails = ({ url, likes, description}) => {
   bigPictureElement.querySelector('.big-picture__img img').src = url;
@@ -105,25 +82,31 @@ const showBigPicture = (data) => {
 
   renderPictureDetails(data);
   let comments = data.comments;
-  //const commentPortion = a.slice(0, 6);
-  console.log(comments);
 
-  const commentPortion1 = comments.slice(0, COMMENT_PORTION);
-
+  const commentPortion1 = comments.slice(0, COMMENT_PORTION - 1 );
+   console.log(commentPortion1);
   const fragment = document.createDocumentFragment();
   commentListElement.innerHTML = '' ;
     commentPortion1.forEach((item) => {
      const comment = createComment(item);
       fragment.append(comment);
-     });
-commentListElement.append(fragment);
+       });
+    commentListElement.append(fragment);
+    console.log(commentPortion1);
 
-  if (data.comments.length > 0){
+if (comments.length <= COMMENT_PORTION) {
+commentCount.textContent = commentPortion1.length + ' из ' + commentPortion1.length + ' комментариев ';
 
-    renderComments(data.comments, data.comments.length);
-  }
+}
+ // else {
+    renderComments(comments);
 
 
+ //const onCommentsLoaderClick = () => renderComments(comments);
+
+ const onCancelButtonClick = () => hideBigPicture();
+
+  cancelButtonElement.addEventListener('click', onCancelButtonClick);
 
 };
 
@@ -147,7 +130,6 @@ commentListElement.append(fragment);
 
  const pictures = listOfPhotoDescriptions;
 
-  cancelButtonElement.addEventListener('click', onCancelButtonClick);
-  commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
+
 
 export { pictures, findPicture};
