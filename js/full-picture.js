@@ -23,6 +23,7 @@ const createComment = ({avatar, name, message}) => {
 };
 
   const renderComments = (comments) => {
+    console.log(comments);
     const l = comments.length;
     //for ( let commentsShown = 1; commentsShown < Math.ceil(l/COMMENT_PORTION+1); commentsShown++){
       let commentsShown = COMMENT_PORTION;
@@ -32,7 +33,7 @@ const createComment = ({avatar, name, message}) => {
       commentsLoaderElement.classList.remove('hidden');
 
       commentCount.textContent = COMMENT_PORTION + ' из ' + comments.length + ' комментариев '
-    console.log(commentCountElement.textContent);
+
         const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
     commentsShown += COMMENT_PORTION;
      console.log(commentPortion);
@@ -46,9 +47,7 @@ const createComment = ({avatar, name, message}) => {
            });
 
       commentListElement.append(fragment);
-
-     onCommentsLoaderClick = () => renderComments(comments);
-
+     const onCommentsLoadClick = () => renderComments(comments);
 
     };
   //};
@@ -98,11 +97,12 @@ if (comments.length <= COMMENT_PORTION) {
 commentCount.textContent = commentPortion1.length + ' из ' + commentPortion1.length + ' комментариев ';
 
 }
- // else {
+  //   else {
     renderComments(comments);
+    // commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
 
 
- //const onCommentsLoaderClick = () => renderComments(comments);
+ //onCommentsLoaderClick = () => renderComments(comments);
 
  const onCancelButtonClick = () => hideBigPicture();
 
