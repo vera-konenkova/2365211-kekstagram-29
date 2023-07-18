@@ -6,7 +6,7 @@ renderThumbnails(listOfPhotoDescriptions);
 let COMMENT_PORTION = 5;
 
 const bigPictureElement = document.querySelector('.big-picture');
-const commentCountElement = bigPictureElement.querySelector('.comments-count');
+//const commentCountElement = bigPictureElement.querySelector('.comments-count');
 const commentCount = bigPictureElement.querySelector('.social__comment-count');
 const commentListElement = bigPictureElement.querySelector('.social__comments');
 const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
