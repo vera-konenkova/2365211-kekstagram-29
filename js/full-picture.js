@@ -28,7 +28,7 @@ let commentsShown;
 
     const comShown = comments.length - Math.ceil(comments.length/COMMENT_PORTION - 1)*COMMENT_PORTION;
     console.log(comShown)
-    if ((comShown + commentsShown) >= comments.length) {
+    if ((comShown + commentsShown) > comments.length) {
       commentsLoaderElement.classList.add('hidden');
       commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
 
@@ -45,21 +45,20 @@ let commentsShown;
         console.log(commentsShown);
 
         const fragment = document.createDocumentFragment();
-        commentListElement.innerHTML = '' ;
           commentPortion.forEach((item) => {
            const comment = createComment(item);
             fragment.append(comment);
            });
+
            commentsShown += COMMENT_PORTION;
+           commentListElement.innerHTML = '' ;
+
            console.log(commentsShown)
            commentListElement.append(fragment);
       commentCount.textContent = commentsShown + ' из ' + comments.length + ' комментариев ';
 
-      const onCommentsLoadClick = () => renderComments(comments);
-      commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
-
     };
-  //};
+
     };
 
 const hideBigPicture = () => {
@@ -90,6 +89,10 @@ const showBigPicture = (data) => {
 
   renderPictureDetails(data);
   let comments = data.comments;
+        commentListElement.innerHTML = '' ;
+
+  const onCommentsLoadClick = () => renderComments(comments);
+  commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
 
       commentsShown = 0;
 
