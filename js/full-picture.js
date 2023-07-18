@@ -21,13 +21,13 @@ const createComment = ({avatar, name, message}) => {
   comment.querySelector('.social__text').textContent = message;
   return comment;
 };
-
+let commentsShown = COMMENT_PORTION;
   const renderComments = (comments) => {
     console.log(comments);
-    const l = comments.length;
+
     //for ( let commentsShown = 1; commentsShown < Math.ceil(l/COMMENT_PORTION+1); commentsShown++){
-      let commentsShown = COMMENT_PORTION;
-    if (commentsShown > l) {
+
+    if (commentsShown > comments.length) {
       commentsLoaderElement.classList.add('hidden');
     } else {
       commentsLoaderElement.classList.remove('hidden');
@@ -47,7 +47,8 @@ const createComment = ({avatar, name, message}) => {
            });
 
       commentListElement.append(fragment);
-     const onCommentsLoadClick = () => renderComments(comments);
+      commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
+      const onCommentsLoadClick = () => renderComments(comments);
 
     };
   //};
@@ -82,7 +83,7 @@ const showBigPicture = (data) => {
   renderPictureDetails(data);
   let comments = data.comments;
 
-  const commentPortion1 = comments.slice(0, COMMENT_PORTION - 1 );
+  const commentPortion1 = comments.slice(0, COMMENT_PORTION);
    console.log(commentPortion1);
   const fragment = document.createDocumentFragment();
   commentListElement.innerHTML = '' ;
@@ -97,17 +98,16 @@ if (comments.length <= COMMENT_PORTION) {
 commentCount.textContent = commentPortion1.length + ' из ' + commentPortion1.length + ' комментариев ';
 
 }
-  //   else {
+    else {
     renderComments(comments);
-    // commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
+    // commentsLoaderElement.addEventListener('click', onCommentsLoadClick)
 
+    //onCommentsLoaderClick = () => renderComments(comments);
 
- //onCommentsLoaderClick = () => renderComments(comments);
-
- const onCancelButtonClick = () => hideBigPicture();
+    };
+    const onCancelButtonClick = () => hideBigPicture();
 
   cancelButtonElement.addEventListener('click', onCancelButtonClick);
-
 };
 
   // поиск картинки
