@@ -21,15 +21,17 @@ const createComment = ({avatar, name, message}) => {
   comment.querySelector('.social__text').textContent = message;
   return comment;
 };
-let commentsShown = 0;
+let commentsShown;
 
   const renderComments = (comments) => {
     console.log(comments);
 
     const comShown = comments.length - Math.ceil(comments.length/COMMENT_PORTION - 1)*COMMENT_PORTION;
     console.log(comShown)
-    if ((comShown + commentsShown) > comments.length) {
+    if ((comShown + commentsShown) >= comments.length) {
       commentsLoaderElement.classList.add('hidden');
+      commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
+
     } else {
       commentsLoaderElement.classList.remove('hidden');
 
@@ -49,6 +51,7 @@ let commentsShown = 0;
             fragment.append(comment);
            });
            commentsShown += COMMENT_PORTION;
+           console.log(commentsShown)
            commentListElement.append(fragment);
       commentCount.textContent = commentsShown + ' из ' + comments.length + ' комментариев ';
 
