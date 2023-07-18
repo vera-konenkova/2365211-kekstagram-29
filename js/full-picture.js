@@ -21,7 +21,8 @@ const createComment = ({avatar, name, message}) => {
   comment.querySelector('.social__text').textContent = message;
   return comment;
 };
-let commentsShown = COMMENT_PORTION;
+let commentsShown = 0;
+
   const renderComments = (comments) => {
     console.log(comments);
 
@@ -32,7 +33,6 @@ let commentsShown = COMMENT_PORTION;
     } else {
       commentsLoaderElement.classList.remove('hidden');
 
-      commentCount.textContent = COMMENT_PORTION + ' из ' + comments.length + ' комментариев '
 
         const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
     commentsShown += COMMENT_PORTION;
@@ -47,8 +47,10 @@ let commentsShown = COMMENT_PORTION;
            });
 
       commentListElement.append(fragment);
-      commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
+      commentCount.textContent = COMMENT_PORTION + ' из ' + comments.length + ' комментариев ';
       const onCommentsLoadClick = () => renderComments(comments);
+
+      commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
 
     };
   //};
@@ -99,6 +101,9 @@ commentCount.textContent = commentPortion1.length + ' из ' + commentPortion1.l
 
 }
     else {
+//      commentsShown = COMMENT_PORTION;
+      commentsShown = 0;
+
     renderComments(comments);
     // commentsLoaderElement.addEventListener('click', onCommentsLoadClick)
 
