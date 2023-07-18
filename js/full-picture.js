@@ -26,17 +26,17 @@ let commentsShown = 0;
   const renderComments = (comments) => {
     console.log(comments);
 
-    //for ( let commentsShown = 1; commentsShown < Math.ceil(l/COMMENT_PORTION+1); commentsShown++){
-
-    const comShown = comments.length - Math.ceil(comments.length/COMMENT_PORTION+1);
-
+    const comShown = comments.length - Math.ceil(comments.length/COMMENT_PORTION - 1)*COMMENT_PORTION;
+    console.log(comShown)
     if ((comShown + commentsShown) > comments.length) {
       commentsLoaderElement.classList.add('hidden');
     } else {
       commentsLoaderElement.classList.remove('hidden');
 
       if (comShown + commentsShown === comments.length) {
-        commentsShown = comments.length - comShown;
+       // commentsShown = comments.length - comShown;
+        commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
+        commentsLoaderElement.classList.add('hidden');
       }
         const commentPortion = comments.slice(commentsShown , COMMENT_PORTION + commentsShown);
         console.log(commentPortion);
@@ -88,25 +88,10 @@ const showBigPicture = (data) => {
   renderPictureDetails(data);
   let comments = data.comments;
 
-  const commentPortion1 = comments.slice(0, COMMENT_PORTION);
-   console.log(commentPortion1);
-  const fragment = document.createDocumentFragment();
-  commentListElement.innerHTML = '' ;
-    commentPortion1.forEach((item) => {
-     const comment = createComment(item);
-      fragment.append(comment);
-       });
-    commentListElement.append(fragment);
-    console.log(commentPortion1);
-
-    if (comments.length <= COMMENT_PORTION) {
-    commentCount.textContent = commentPortion1.length + ' из ' + commentPortion1.length + ' комментариев ';
-      }
-    else {
       commentsShown = 0;
 
     renderComments(comments);
-    };
+
 
     const onCancelButtonClick = () => hideBigPicture();
 
