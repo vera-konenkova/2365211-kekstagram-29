@@ -22,16 +22,16 @@ const createComment = ({avatar, name, message}) => {
   return comment;
 };
 let commentsShown;
+commentListElement.innerHTML = '' ;
 
   const renderComments = (comments) => {
     console.log(comments);
-
     const comShown = comments.length - Math.ceil(comments.length/COMMENT_PORTION - 1)*COMMENT_PORTION;
     console.log(comShown)
-    if ((comShown + commentsShown) > comments.length) {
+    if ((commentsShown) > comments.length) {
       commentsLoaderElement.classList.add('hidden');
       commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
-
+      commentListElement.innerHTML = '' ;
     } else {
       commentsLoaderElement.classList.remove('hidden');
 
@@ -39,6 +39,7 @@ let commentsShown;
        // commentsShown = comments.length - comShown;
         commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
         commentsLoaderElement.classList.add('hidden');
+        commentListElement.innerHTML = '' ;
       }
         const commentPortion = comments.slice(commentsShown , COMMENT_PORTION + commentsShown);
         console.log(commentPortion);
@@ -51,7 +52,6 @@ let commentsShown;
            });
 
            commentsShown += COMMENT_PORTION;
-           commentListElement.innerHTML = '' ;
 
            console.log(commentsShown)
            commentListElement.append(fragment);
@@ -123,7 +123,5 @@ const showBigPicture = (data) => {
  };
 
  const pictures = listOfPhotoDescriptions;
-
-
 
 export { pictures, findPicture};
