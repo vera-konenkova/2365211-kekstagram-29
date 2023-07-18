@@ -28,16 +28,19 @@ let commentsShown = 0;
 
     //for ( let commentsShown = 1; commentsShown < Math.ceil(l/COMMENT_PORTION+1); commentsShown++){
 
-    if (commentsShown > comments.length) {
+    const comShown = comments.length - Math.ceil(comments.length/COMMENT_PORTION+1);
+
+    if ((comShown + commentsShown) > comments.length) {
       commentsLoaderElement.classList.add('hidden');
     } else {
       commentsLoaderElement.classList.remove('hidden');
 
-
-        const commentPortion = comments.slice(commentsShown, COMMENT_PORTION + commentsShown);
-    commentsShown += COMMENT_PORTION;
-     console.log(commentPortion);
-     console.log(commentsShown);
+      if (comShown + commentsShown === comments.length) {
+        commentsShown = comments.length - comShown;
+      }
+        const commentPortion = comments.slice(commentsShown , COMMENT_PORTION + commentsShown);
+        console.log(commentPortion);
+        console.log(commentsShown);
 
         const fragment = document.createDocumentFragment();
         commentListElement.innerHTML = '' ;
@@ -45,11 +48,11 @@ let commentsShown = 0;
            const comment = createComment(item);
             fragment.append(comment);
            });
+           commentsShown += COMMENT_PORTION;
+           commentListElement.append(fragment);
+      commentCount.textContent = commentsShown + ' из ' + comments.length + ' комментариев ';
 
-      commentListElement.append(fragment);
-      commentCount.textContent = COMMENT_PORTION + ' из ' + comments.length + ' комментариев ';
       const onCommentsLoadClick = () => renderComments(comments);
-
       commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
 
     };
@@ -96,20 +99,15 @@ const showBigPicture = (data) => {
     commentListElement.append(fragment);
     console.log(commentPortion1);
 
-if (comments.length <= COMMENT_PORTION) {
-commentCount.textContent = commentPortion1.length + ' из ' + commentPortion1.length + ' комментариев ';
-
-}
+    if (comments.length <= COMMENT_PORTION) {
+    commentCount.textContent = commentPortion1.length + ' из ' + commentPortion1.length + ' комментариев ';
+      }
     else {
-//      commentsShown = COMMENT_PORTION;
       commentsShown = 0;
 
     renderComments(comments);
-    // commentsLoaderElement.addEventListener('click', onCommentsLoadClick)
-
-    //onCommentsLoaderClick = () => renderComments(comments);
-
     };
+
     const onCancelButtonClick = () => hideBigPicture();
 
   cancelButtonElement.addEventListener('click', onCancelButtonClick);
