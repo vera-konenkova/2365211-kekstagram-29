@@ -1,5 +1,3 @@
-import { createPhotoDescriptions } from '/js/data.js';
-import { renderThumbnails } from '/js/thumbnail.js';
+import { findPicture, pictures } from '/js/full-picture.js';
 
-renderThumbnails(createPhotoDescriptions());
-
+findPicture(pictures);
