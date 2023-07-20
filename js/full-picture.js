@@ -21,26 +21,11 @@ const createComment = ({avatar, name, message}) => {
   comment.querySelector('.social__text').textContent = message;
   return comment;
 };
-let commentsShown;
-commentListElement.innerHTML = '' ;
+  let commentsShown = 0;
+  commentListElement.innerHTML = '' ;
 
   const renderComments = (comments) => {
-    console.log(comments);
-    const comShown = comments.length - Math.ceil(comments.length/COMMENT_PORTION - 1)*COMMENT_PORTION;
-    console.log(comShown)
-    if ((commentsShown) > comments.length) {
-      commentsLoaderElement.classList.add('hidden');
-      commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
-      commentListElement.innerHTML = '' ;
-    } else {
-      commentsLoaderElement.classList.remove('hidden');
 
-      if (comShown + commentsShown === comments.length) {
-       // commentsShown = comments.length - comShown;
-        commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
-        commentsLoaderElement.classList.add('hidden');
-        commentListElement.innerHTML = '' ;
-      }
         const commentPortion = comments.slice(commentsShown , COMMENT_PORTION + commentsShown);
         console.log(commentPortion);
         console.log(commentsShown);
@@ -55,11 +40,22 @@ commentListElement.innerHTML = '' ;
 
            console.log(commentsShown)
            commentListElement.append(fragment);
-      commentCount.textContent = commentsShown + ' из ' + comments.length + ' комментариев ';
+
+    if (commentPortion.length >= comments.length) {
+      commentsLoaderElement.classList.add('hidden');
+      commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
+    } else if (commentPortion.length - commentsShown <= COMMENT_PORTION) {
+      commentsLoaderElement.classList.remove('hidden');
+            commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
+
+    }
+      else {
+                commentsLoaderElement.classList.remove('hidden');
+        commentCount.textContent = commentsShown + ' из ' + comments.length + ' комментариев ';
+      }
 
     };
 
-    };
 
 const hideBigPicture = () => {
   bigPictureElement.classList.add('hidden');
@@ -89,11 +85,7 @@ const showBigPicture = (data) => {
 
   renderPictureDetails(data);
   let comments = data.comments;
-        commentListElement.innerHTML = '' ;
-
-  const onCommentsLoadClick = () => renderComments(comments);
-  commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
-
+      commentListElement.innerHTML = '' ;
       commentsShown = 0;
 
     renderComments(comments);
@@ -102,6 +94,10 @@ const showBigPicture = (data) => {
     const onCancelButtonClick = () => hideBigPicture();
 
   cancelButtonElement.addEventListener('click', onCancelButtonClick);
+
+    const onCommentsLoadClick = () => renderComments(comments);
+  commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
+
 };
 
   // поиск картинки
@@ -118,6 +114,9 @@ const showBigPicture = (data) => {
      const picture = listOfPhoto.find(
        (item) => item.id === +thumbnail.dataset.thumbnailId
      );
+           commentListElement.innerHTML = '' ;
+      //commentsShown = 0;
+
     showBigPicture(picture);
    });
  };
