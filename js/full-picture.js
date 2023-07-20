@@ -22,9 +22,10 @@ const createComment = ({avatar, name, message}) => {
   return comment;
 };
   let commentsShown = 0;
-  commentListElement.innerHTML = '' ;
 
   const renderComments = (comments) => {
+    commentListElement.innerHTML = '' ;
+
         const commentPortion = comments.slice(commentsShown , COMMENT_PORTION + commentsShown);
            commentsShown += COMMENT_PORTION;
 
@@ -38,13 +39,16 @@ const createComment = ({avatar, name, message}) => {
     if (comments.length <= COMMENT_PORTION) {
       commentsLoaderElement.classList.add('hidden');
       commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
-    } else if (comments.length <= commentsShown + COMMENT_PORTION) {
-      commentsLoaderElement.classList.remove('hidden');
+      return;
+    } else if (comments.length <= commentsShown) {
+      commentsLoaderElement.classList.add('hidden');
       commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
+      //return;
     }
       else {
                 commentsLoaderElement.classList.remove('hidden');
         commentCount.textContent = commentsShown + ' из ' + comments.length + ' комментариев ';
+
       }
     };
 
