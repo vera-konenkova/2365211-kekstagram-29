@@ -4,6 +4,7 @@ import { listOfPhotoDescriptions } from './data.js';
 renderThumbnails(listOfPhotoDescriptions);
 
 let COMMENT_PORTION = 5;
+let comments =[];
 
 const bigPictureElement = document.querySelector('.big-picture');
 const commentCount = bigPictureElement.querySelector('.social__comment-count');
@@ -21,6 +22,8 @@ const createComment = ({avatar, name, message}) => {
   return comment;
 };
   let commentsShown = 0;
+  const onCommentsLoadClick = () => renderComments(comments);
+  const onCancelButtonClick = () => hideBigPicture();
 
   const renderComments = (comments) => {
     commentListElement.innerHTML = '' ;
@@ -72,12 +75,12 @@ function onDocumentKeydown(evt) {
   bigPictureElement.querySelector('.likes-count').textContent = likes;
   bigPictureElement.querySelector('.social__caption').textContent = description;
  };
+   // const onCommentsLoadClick = () => renderComments(comments);
 
 const showBigPicture = (data) => {
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-      let comments =[];
       renderPictureDetails(data);
       comments = data.comments;
       commentListElement.innerHTML = '' ;
@@ -85,12 +88,10 @@ const showBigPicture = (data) => {
 
     renderComments(comments);
 
-    const onCancelButtonClick = () => hideBigPicture();
+    cancelButtonElement.removeEventListener('click', onCancelButtonClick);
     cancelButtonElement.addEventListener('click', onCancelButtonClick);
-
-    const onCommentsLoadClick = () => renderComments(comments);
-      commentsLoaderElement.removeEventListener('click', onCommentsLoadClick);
-      commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
+    commentsLoaderElement.removeEventListener('click', onCommentsLoadClick);
+    commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
 };
 
   // поиск картинки
