@@ -25,42 +25,35 @@ const createComment = ({avatar, name, message}) => {
   commentListElement.innerHTML = '' ;
 
   const renderComments = (comments) => {
-
         const commentPortion = comments.slice(commentsShown , COMMENT_PORTION + commentsShown);
-        console.log(commentPortion);
-        console.log(commentsShown);
+           commentsShown += COMMENT_PORTION;
 
         const fragment = document.createDocumentFragment();
           commentPortion.forEach((item) => {
            const comment = createComment(item);
             fragment.append(comment);
            });
-
-           commentsShown += COMMENT_PORTION;
-
-           console.log(commentsShown)
            commentListElement.append(fragment);
 
-    if (commentPortion.length >= comments.length) {
+    if (comments.length <= COMMENT_PORTION) {
       commentsLoaderElement.classList.add('hidden');
       commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
-    } else if (commentPortion.length - commentsShown <= COMMENT_PORTION) {
+    } else if (comments.length <= commentsShown + COMMENT_PORTION) {
       commentsLoaderElement.classList.remove('hidden');
-            commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
-
+      commentCount.textContent = comments.length + ' из ' + comments.length + ' комментариев ';
     }
       else {
                 commentsLoaderElement.classList.remove('hidden');
         commentCount.textContent = commentsShown + ' из ' + comments.length + ' комментариев ';
       }
-
     };
-
 
 const hideBigPicture = () => {
   bigPictureElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+  commentsShown = 0;
+  commentListElement.innerHTML = '' ;
 };
 
 function onDocumentKeydown(evt) {
@@ -82,21 +75,20 @@ const showBigPicture = (data) => {
   bodyElement.classList.add('modal-open');
 
   document.addEventListener('keydown', onDocumentKeydown);
-
-  renderPictureDetails(data);
-  let comments = data.comments;
+      let comments =[];
+      renderPictureDetails(data);
+      comments = data.comments;
       commentListElement.innerHTML = '' ;
       commentsShown = 0;
 
     renderComments(comments);
 
-
     const onCancelButtonClick = () => hideBigPicture();
-
-  cancelButtonElement.addEventListener('click', onCancelButtonClick);
+    cancelButtonElement.addEventListener('click', onCancelButtonClick);
 
     const onCommentsLoadClick = () => renderComments(comments);
-  commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
+      commentsLoaderElement.removeEventListener('click', onCommentsLoadClick);
+      commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
 
 };
 
