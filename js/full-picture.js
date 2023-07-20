@@ -6,7 +6,6 @@ renderThumbnails(listOfPhotoDescriptions);
 let COMMENT_PORTION = 5;
 
 const bigPictureElement = document.querySelector('.big-picture');
-//const commentCountElement = bigPictureElement.querySelector('.comments-count');
 const commentCount = bigPictureElement.querySelector('.social__comment-count');
 const commentListElement = bigPictureElement.querySelector('.social__comments');
 const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
@@ -77,7 +76,6 @@ function onDocumentKeydown(evt) {
 const showBigPicture = (data) => {
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-
   document.addEventListener('keydown', onDocumentKeydown);
       let comments =[];
       renderPictureDetails(data);
@@ -93,7 +91,6 @@ const showBigPicture = (data) => {
     const onCommentsLoadClick = () => renderComments(comments);
       commentsLoaderElement.removeEventListener('click', onCommentsLoadClick);
       commentsLoaderElement.addEventListener('click', onCommentsLoadClick);
-
 };
 
   // поиск картинки
