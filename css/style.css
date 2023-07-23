@@ -1337,7 +1337,7 @@
 
   .pristine-error {
     color: red;
-    background-color: #ffe753;
+    background-color: yellow;
     font-weight: bold;
     margin: 0;
     margin-bottom: 50px;
