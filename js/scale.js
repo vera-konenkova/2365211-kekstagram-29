@@ -8,28 +8,33 @@ const plusButton = document.querySelector('.scale__control--bigger');
 const scaleControl = document.querySelector('.scale__control--value');
 const uploadPreview = document.querySelector('.img-upload__preview');
 
-const scaleImage = (value) => {
-  uploadPreview.style.transform = `scale(${value / PERCENT_DIVIDER})`;
-  scaleControl.value = `${value}`;
-};
+let scaleNumber;
 
+// Получаем число из строки
+const getScaleImage = (scaleString) => parseInt(scaleString.value, 10);
+
+// Уменьшение изображения
 const onMinusButtonClick = () => {
-  scaleImage(
-    Math.max(parseInt(scaleControl.value,10) - SCALE_STEP, MIN_VALUE)
-  );
+  scaleNumber = getScaleImage(scaleControl);
+  if (scaleNumber > MIN_VALUE) {
+    scaleControl.value = `${scaleNumber - SCALE_STEP}%`;
+    uploadPreview.style.transform = `scale(${(scaleNumber - SCALE_STEP) / PERCENT_DIVIDER})`;
+  }
 };
 
+// Увеличение изображения
 const onPlusButtonClick = () => {
-  scaleImage(
-    Math.min(parseInt(scaleControl.value,10) + SCALE_STEP, MAX_VALUE)
-  );
+  scaleNumber = getScaleImage(scaleControl);
+  if (scaleNumber < MAX_VALUE) {
+    scaleControl.value = `${scaleNumber + SCALE_STEP}%`;
+    uploadPreview.style.transform = `scale(${(scaleNumber + SCALE_STEP) / 100})`;
+  }
 };
-
 //const resetScale = () => scaleImage(MIN_VALUE);
 
 minusButton.addEventListener('click', onMinusButtonClick);
 plusButton.addEventListener('click', onPlusButtonClick);
 
-const resetScale = () => scaleImage(scaleControl.value);
+const resetScale = () => getScaleImage(scaleControl.value);
 
 export {resetScale};
