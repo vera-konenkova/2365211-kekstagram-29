@@ -1,10 +1,13 @@
 import {addValidator, resetPristine, validatePristine} from './form-validate.js';
+import {changeOriginalEffect, onEffectListChange} from './filters.js';
+
 
 const form = document.querySelector('.img-upload__form');
 const submitButton = document.querySelector('.img-upload__submit');
 const overlay = document.querySelector('.img-upload__overlay');
 const cancelButton = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
+const effectsList = document.querySelector('.effects__list');
 
 const onDocumentKeydown = (evt) => {
   if(evt.key === 'Escape' && !evt.target.closest('.text__hashtags') &&
@@ -18,9 +21,12 @@ const showForm = () => {
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
-};
+  changeOriginalEffect();
+  effectsList.addEventListener('change', (onEffectListChange))
+  };
 
 function hideForm() {
+  effectsList.removeEventListener('change', onEffectListChange)
   form.reset();
   resetPristine();
   overlay.classList.add('hidden');
