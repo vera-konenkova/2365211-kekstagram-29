@@ -23,7 +23,7 @@ const createComment = ({avatar, name, message}) => {
 };
 let commentsShown = 0;
 
-const renderComments = (comments) => {
+const renderComments = () => {
   commentListElement.innerHTML = '' ;
 
   const commentPortion = comments.slice(commentsShown , COMMENT_PORTION + commentsShown);
@@ -53,7 +53,7 @@ const hideBigPicture = () => {
   commentListElement.innerHTML = '' ;
 };
 
-const onCommentsLoadClick = () => renderComments(comments);
+const onCommentsLoadClick = () => renderComments();
 const onCancelButtonClick = () => hideBigPicture();
 
 function onDocumentKeydown(evt) {
@@ -80,7 +80,7 @@ const showBigPicture = (data) => {
   commentListElement.innerHTML = '' ;
   commentsShown = 0;
 
-  renderComments(comments);
+  renderComments();
 
   cancelButtonElement.removeEventListener('click', onCancelButtonClick);
   cancelButtonElement.addEventListener('click', onCancelButtonClick);
