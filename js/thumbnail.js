@@ -12,15 +12,15 @@ const createThubmnail = ({ comments, description, likes, url, id }) => {
   thumbnail.querySelector('.picture__img').src = url;
   thumbnail.dataset.thumbnailId = id;
   return thumbnail;
-}
+};
 
 const renderThumbnails = (pictures) => {
   const fragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
-  const thumbnail = createThubmnail(picture);
-  fragment.append(thumbnail);
+    const thumbnail = createThubmnail(picture);
+    fragment.append(thumbnail);
 
-});
-container.append(fragment);
+  });
+  container.append(fragment);
 };
 export {renderThumbnails};
