@@ -1,7 +1,8 @@
 import { renderThumbnails } from '/js/thumbnail.js';
-import { listOfPhotoDescriptions } from './data.js';
+//import { listOfPhotoDescriptions } from './data.js';
+import { datas } from './api.js';
 
-renderThumbnails(listOfPhotoDescriptions);
+renderThumbnails(datas);
 
 const COMMENT_PORTION = 5;
 let comments = [];
@@ -109,6 +110,6 @@ const findPicture = (listOfPhoto) => {
   });
 };
 
-const pictures = listOfPhotoDescriptions;
+const pictures = datas;
 
 export { pictures, findPicture};
