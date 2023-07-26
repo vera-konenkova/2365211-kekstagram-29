@@ -1,5 +1,5 @@
 import {addValidator, resetPristine, validatePristine} from './form-validate.js';
-import {changeOriginalEffect, onEffectListChange} from './filters.js';
+import {changeOriginalEffect, onEffectListChange, iniSlider} from './filters.js';
 
 
 const form = document.querySelector('.img-upload__form');
@@ -21,12 +21,13 @@ const showForm = () => {
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
+  iniSlider();
   changeOriginalEffect();
-  effectsList.addEventListener('change', (onEffectListChange))
-  };
+  effectsList.addEventListener('change', (onEffectListChange));
+};
 
 function hideForm() {
-  effectsList.removeEventListener('change', onEffectListChange)
+  effectsList.removeEventListener('change', onEffectListChange);
   form.reset();
   resetPristine();
   overlay.classList.add('hidden');

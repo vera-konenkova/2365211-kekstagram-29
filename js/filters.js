@@ -2,6 +2,7 @@
 
 // Элемент, в который будет отрисовывать слайдер
 
+const sliderConteiner = document.querySelector('.effect-level');
 const sliderElement = document.querySelector('.img-upload__effect-level');
 
 // Уровень эффекта записывается в поле .effect-level__value
@@ -13,25 +14,26 @@ const effectLevelValue = document.querySelector('.effect-level__value');
 const imagePreview = document.querySelector('.img-upload__preview');
 
 // Создаем слайдер
+const iniSlider = () => {
 
-noUiSlider.create(sliderElement, {
+  noUiSlider.create(sliderElement, {
 
-  range: {
+    range: {
 
-    min: 0,
+      min: 0,
 
-    max: 1,
+      max: 1,
 
-  },
+    },
 
-  start: 1,
+    start: 1,
 
-  step: 0.1,
+    step: 0.1,
 
-  connect: 'lower',
+    connect: 'lower',
 
-});
-
+  });
+};
 // Изменяем параметры слайдера
 
 const changeSlider = (opts) => {
@@ -62,7 +64,7 @@ const changeOriginalEffect = () => {
 
   imagePreview.style.filter = '';
 
-  sliderElement.classList.add('hidden');
+  sliderConteiner.classList.add('hidden');
 
 };
 
@@ -179,7 +181,6 @@ const PARAMETRS_EFFECTS = {
     unitMeasurement: '',
 
   }
-
 };
 
 // Изменяем интенсивность применяемого фильтра в зависимости от передвижения слайдера
@@ -199,7 +200,6 @@ const changeValueEffect = (effectName, unitMeasurement) => {
     imagePreview.style.filter = `${effectName}(${effectLevelValue.value}${unitMeasurement})`;
 
   });
-
 };
 
 // Определяем какой элемент выбрали и применяем необходимый тип фильтра + значение
@@ -213,10 +213,9 @@ const onEffectListChange = (evt) => {
     changeOriginalEffect();
 
     return;
-
   }
 
-  sliderElement.classList.remove('hidden');
+  sliderConteiner.classList.remove('hidden');
 
   const opts = PARAMETRS_EFFECTS[effect].opts;
 
@@ -230,4 +229,4 @@ const onEffectListChange = (evt) => {
 
 };
 
-export {changeOriginalEffect, onEffectListChange};
+export {changeOriginalEffect, onEffectListChange, iniSlider};
