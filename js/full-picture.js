@@ -111,5 +111,5 @@ const findPicture = (listOfPhoto) => {
 };
 
 const pictures = datas;
-
+console.log(datas);
 export { pictures, findPicture};
