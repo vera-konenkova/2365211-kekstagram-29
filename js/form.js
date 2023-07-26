@@ -41,6 +41,7 @@ const showForm = () => {
 };
 
 function hideForm() {
+  form.reset();
   effectsList.removeEventListener('change', onEffectListChange);
   form.reset();
   resetPristine();
