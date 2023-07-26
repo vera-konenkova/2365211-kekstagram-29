@@ -25,5 +25,5 @@ const sendData = (url, onSuccess, onFail, body) => {
       onFail();
     });
 };
-let datas = await getData();
+const datas = await getData();
 export {getData, sendData, datas};

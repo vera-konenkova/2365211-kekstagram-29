@@ -4,6 +4,7 @@ import {sendData } from './api.js';
 import {renderFailMessage, renderSuccessMessage} from './messages.js';
 
 const GET_URL = 'https://28.javascript.pages.academy/kekstagram';
+
 const form = document.querySelector('.img-upload__form');
 const submitButton = document.querySelector('.img-upload__submit');
 const overlay = document.querySelector('.img-upload__overlay');
@@ -52,6 +53,7 @@ function hideForm() {
 
 const onCancelButtonclick = () => hideForm();
 const onFileInputChange = () => showForm();
+
 const onFormSubmit = (evt) => {
   evt.preventDefault();
   if (validatePristine()) {
