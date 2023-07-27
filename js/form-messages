@@ -34,7 +34,7 @@ const showMessage = (message, buttonMessage) => {
 
 // Функция закрытия сообщения формы по кнопке ESС
 function onDocumentKeydown (evt) {
-  if (isEscapeKey(evt)) {
+  if (pressEscButton(evt)) {
     evt.preventDefault();
     closeMessage();
   }
