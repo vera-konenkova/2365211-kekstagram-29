@@ -43,5 +43,7 @@ const createRandomNumberFromRangeGenerator = (min, max) => {
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 const pressEscButton = (evt) => evt.key === 'Escape';
+// Проверка, является ли нажатая кнопка Esc
+
 
 export {getRandomInteger, createRandomNumberFromRangeGenerator, getRandomArrayElement, pressEscButton, showAlert};

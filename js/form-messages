@@ -1,5 +1,5 @@
 // Показывает сообщения после отправки формы
-import { isEscapeKey } from './util.js';
+import { pressEscButton } from './util.js';
 import { pristine, uploadForm } from './form-validate.js';
 import { sendData } from './api.js';
 import { closeForm } from './form.js';
