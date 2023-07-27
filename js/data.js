@@ -69,10 +69,10 @@ const createPhotoDescriptions = () => {
   };
 };
 
-const arrayOfDiscription = () => Array.from({length: USER_PHOTO_COUNT}, createPhotoDescriptions);
+//const arrayOfDiscription = () => Array.from({length: USER_PHOTO_COUNT}, createPhotoDescriptions);
 
-const listOfPhotoDescriptions = arrayOfDiscription();
+//const listOfPhotoDescriptions = arrayOfDiscription();
 
-export {listOfPhotoDescriptions};
+//export {listOfPhotoDescriptions};
 
 export {createPhotoDescriptions};
