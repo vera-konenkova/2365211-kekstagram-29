@@ -1,6 +1,6 @@
 import {addValidator, resetPristine, validatePristine} from './form-validate.js';
 import {changeOriginalEffect, onEffectListChange, iniSlider} from './filters.js';
-import {sendData } from './api.js';
+import {datas} from './api.js';
 import {renderFailMessage, renderSuccessMessage} from './messages.js';
 
 const GET_URL = 'https://28.javascript.pages.academy/kekstagram';
@@ -58,7 +58,7 @@ const onFormSubmit = (evt) => {
   evt.preventDefault();
   if (validatePristine()) {
     submitButton.disabled = true;
-    sendData(GET_URL, onSendSuccess, onSendFail, new FormData(evt.target));
+    datas(GET_URL, onSendSuccess, onSendFail, new FormData(evt.target));
   }
 };
 
