@@ -12,6 +12,7 @@ const effectLevelValue = document.querySelector('.effect-level__value');
 // При изменении уровня интенсивности эффекта, CSS-стили картинки внутри .img-upload__preview обновляются
 
 const imagePreview = document.querySelector('.img-upload__preview');
+const preview = imagePreview.querySelector('img');
 
 // Создаем слайдер
 const iniSlider = () => {
@@ -62,7 +63,7 @@ const changeSlider = (opts) => {
 
 const changeOriginalEffect = () => {
 
-  imagePreview.style.filter = '';
+  preview.style.filter = '';
 
   sliderConteiner.classList.add('hidden');
 
@@ -197,7 +198,7 @@ const changeValueEffect = (effectName, unitMeasurement) => {
 
     // Подставляем данные
 
-    imagePreview.style.filter = `${effectName}(${effectLevelValue.value}${unitMeasurement})`;
+    preview.style.filter = `${effectName}(${effectLevelValue.value}${unitMeasurement})`;
 
   });
 };
