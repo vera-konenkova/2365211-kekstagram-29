@@ -5,8 +5,6 @@ import { resetScale } from '/js/scale.js';
 //import './form.js';
 import './form-messages.js';
 
-const imgFilters = document.querySelector('.img-filters');
-imgFilters.classList.remove('img-filters--inactive');
 findPicture(pictures);
 
 

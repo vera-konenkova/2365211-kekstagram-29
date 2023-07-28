@@ -1,6 +1,6 @@
-import { renderThumbnails } from '/js/thumbnail.js';
+//import { renderThumbnails } from '/js/thumbnail.js';
 import { datas } from './api.js';
-
+import './photo-filter.js';
 
 const COMMENT_PORTION = 5;
 let comments = [];
@@ -13,7 +13,7 @@ const bodyElement = document.querySelector('body');
 const commentElement = document.querySelector('#comment').content;
 const cancelButtonElement = bigPictureElement.querySelector('.big-picture__cancel');
 
-renderThumbnails(datas);
+//renderThumbnails(datas);
 
 const createComment = ({avatar, name, message}) => {
   const comment = commentElement.cloneNode(true);
