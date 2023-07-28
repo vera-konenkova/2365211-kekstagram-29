@@ -10,7 +10,8 @@ function showAlert (message) {
   //alert.style.top = '0';
   //alert.style.align = 'center';
   alert.style.padding = '10px 3px';
-  alert.style.fontSize = '20px';
+  alert.style.fontSize = '24px';
+  alert.style.style = 'bold';
   alert.style.textAlign = 'center';
   alert.style.color = 'red';
   alert.style.background = 'yellow';
