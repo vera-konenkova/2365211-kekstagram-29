@@ -11,6 +11,7 @@ const overlay = document.querySelector('.img-upload__overlay');
 const cancelButton = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
 const effectsList = document.querySelector('.effects__list');
+const sliderElement = document.querySelector('.img-upload__effect-level');
 
 const onSendSuccess = () => {
   renderSuccessMessage();
@@ -46,6 +47,7 @@ function hideForm() {
   effectsList.removeEventListener('change', onEffectListChange);
   form.reset();
   resetPristine();
+  sliderElement.noUiSlider.destroy();
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
