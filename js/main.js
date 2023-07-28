@@ -4,7 +4,7 @@ import {resetScale} from '/js/scale.js';
 
 //import './messages.js';
 import './form.js';
-//import './form-messages.js';
+import './form-messages.js';
 findPicture(pictures);
 addFormChange();
 

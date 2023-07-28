@@ -2,7 +2,7 @@
 import { pressEscButton } from './util.js';
 import { pristine, uploadForm } from './form-validate.js';
 import { sendData } from './api.js';
-import { closeForm } from './form.js';
+import { hideForm } from './form.js';
 
 const successMessage = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
 const errorMessage = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
@@ -67,7 +67,7 @@ const unblockUploadButton = () => {
 const sendDataSuccess = async (data) => {
   try {
     await sendData(data);
-    closeForm();
+    hideForm();
     showSuccessMessage();
   } catch {
     showErrorMessage();

@@ -69,4 +69,4 @@ const addFormChange = () => {
   addValidator();
 };
 
-export {addFormChange};
+export {addFormChange, hideForm};
