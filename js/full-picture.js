@@ -1,9 +1,7 @@
 import { renderThumbnails } from '/js/thumbnail.js';
-//import { createPhotoDescriptions} from './data.js';
 import { datas } from './api.js';
-
 renderThumbnails(datas);
-//createPhotoDescriptions(datas);
+
 const COMMENT_PORTION = 5;
 let comments = [];
 
