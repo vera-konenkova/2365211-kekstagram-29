@@ -75,7 +75,7 @@ const sendDataSuccess = async (data) => {
 };
 
 // Отправка формы или показ ошибки (проверка валидации, показ соответствующего окна, сбор информации с формы в formData)
-imageUploadForm.addEventListener('submit', async (evt) => {
+uploadForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
   if (isValid) {
