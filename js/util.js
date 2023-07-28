@@ -3,13 +3,17 @@ const ALERT_SHOW_TIME = 5000;
 // Показываем ошибку
 function showAlert (message) {
   const alert = document.createElement('div');
-  alert.style.position = 'absolute';
-  alert.style.zIndex = '100';
-  alert.style.top = '0';
+  alert.style.top = '50%';
+  alert.style.left = '50%';
+  alert.style.position = 'fix';
+  //alert.style.zIndex = '100';
+  //alert.style.top = '0';
+  //alert.style.align = 'center';
   alert.style.padding = '10px 3px';
   alert.style.fontSize = '20px';
   alert.style.textAlign = 'center';
-  alert.style.background = 'red';
+  alert.style.color = 'red';
+  alert.style.background = 'yellow';
   alert.textContent = message;
   document.body.append(alert);
 
