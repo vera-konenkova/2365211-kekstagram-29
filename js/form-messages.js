@@ -85,3 +85,5 @@ uploadForm.addEventListener('submit', async (evt) => {
     unblockUploadButton();
   }
 });
+
+export {showSuccessMessage, showErrorMessage};

@@ -1,8 +1,7 @@
 import { findPicture, pictures } from '/js/full-picture.js';
-import {addFormChange} from '/js/form.js';
-import {resetScale} from '/js/scale.js';
+import { addFormChange } from '/js/form.js';
+import { resetScale } from '/js/scale.js';
 
-//import './messages.js';
 import './form.js';
 import './form-messages.js';
 findPicture(pictures);

@@ -1,8 +1,7 @@
 import {addValidator, resetPristine, validatePristine} from './form-validate.js';
 import {changeOriginalEffect, onEffectListChange, iniSlider} from './filters.js';
 import {getData} from './api.js';
-import {renderFailMessage, renderSuccessMessage} from './messages.js';
-
+import {showSuccessMessage, showErrorMessage} from './form-messages.js';
 const GET_URL = 'https://28.javascript.pages.academy/kekstagram';
 
 const form = document.querySelector('.img-upload__form');
@@ -14,13 +13,13 @@ const effectsList = document.querySelector('.effects__list');
 const sliderElement = document.querySelector('.img-upload__effect-level');
 
 const onSendSuccess = () => {
-  renderSuccessMessage();
+  showSuccessMessage();
   hideForm();
   submitButton.disabled = false;
 };
 
 const onSendFail = () => {
-  renderFailMessage();
+  showErrorMessage();
   submitButton.disabled = false;
 };
 
