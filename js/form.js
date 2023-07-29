@@ -5,7 +5,7 @@ import {showSuccessMessage, showErrorMessage} from './form-messages.js';
 const URL = 'https://28.javascript.pages.academy/kekstagram';
 
 const form = document.querySelector('.img-upload__form');
-const submitButton = document.querySelector('.img-upload__submit');
+const uploadButton = document.querySelector('.img-upload__submit');
 const overlay = document.querySelector('.img-upload__overlay');
 const cancelButton = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
@@ -15,12 +15,12 @@ const sliderElement = document.querySelector('.img-upload__effect-level');
 const onSendSuccess = () => {
   showSuccessMessage();
   hideForm();
-  submitButton.disabled = false;
+  uploadButton.disabled = false;
 };
 
 const onSendFail = () => {
   showErrorMessage();
-  submitButton.disabled = false;
+  uploadButton.disabled = false;
 };
 
 
@@ -58,7 +58,7 @@ const onFileInputChange = () => showForm();
 const onFormSubmit = (evt) => {
   evt.preventDefault();
   if (validatePristine()) {
-    submitButton.disabled = true;
+    uploadButton.disabled = true;
     getData(URL, onSendSuccess, onSendFail, new FormData(evt.target));
   }
 };
