@@ -7,6 +7,6 @@ import './form-messages.js';
 findPicture(pictures);
 addFormChange();
 resetScale();
-import './photo-filter.js';
+
 import { renderSortedPosts } from './photo-filter.js';
 renderSortedPosts();

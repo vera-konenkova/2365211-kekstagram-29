@@ -7,7 +7,7 @@ const RERENDER_DELAY = 500;
 // Секция с фильтрами
 
 const imgFilters = document.querySelector('.img-filters');
-imgFilters.classList.remove('img-filters--inactive');
+//imgFilters.classList.remove('img-filters--inactive');
 
 const imageFilterDefault = document.querySelector('#filter-default');
 // Сортировка по умолчанию(при открытии страницы)
