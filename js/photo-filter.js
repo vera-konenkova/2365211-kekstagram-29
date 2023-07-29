@@ -5,7 +5,7 @@ import {createRandomPosts, showAlert, debounce} from '/js/util.js';
 const RERENDER_DELAY = 500;
 
 // Секция с фильтрами
-//renderThumbnails(datas);
+
 const imgFilters = document.querySelector('.img-filters');
 imgFilters.classList.remove('img-filters--inactive');
 
