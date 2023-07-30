@@ -26,7 +26,6 @@ const generateArrayUniqueNumbers = (a, b) => {
   return numbers;
 };
 
-
 // Генерируем 10 неповторяющихся чисел от 0 до 24, т.к. в данном случае массив с сервера содержит только 25 постов
 const randomNumbers = generateArrayUniqueNumbers(0, 24);
 const createRandomPosts = (array) => {
@@ -53,26 +52,7 @@ function debounce (callback, timeoutDelay) {
   };
 }
 
-function getRandomNumber (min, max) {
-  const previousValues = [];
-
-  return function () {
-    let currentValue = getRandomInteger(min, max);
-    if (previousValues.length >= (max - min + 1)) {
-      //const error ='Перебраны все числа из диапазона от ' + min + ' до ' + max;
-      return null;
-    }
-    while (previousValues.includes(currentValue)) {
-      currentValue = getRandomInteger(min, max);
-    }
-    previousValues.push(currentValue);
-    return currentValue;
-  };
-}
-
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
-
 const pressEscButton = (evt) => evt.key === 'Escape';
 // Проверка, является ли нажатая кнопка Esc
 
-export {getRandomInteger, getRandomNumber, getRandomArrayElement, pressEscButton, debounce, createRandomPosts};
+export {getRandomInteger, pressEscButton, debounce, createRandomPosts};
