@@ -13,5 +13,3 @@ findPicture(pictures);
 addFormChange();
 resetScale();
 import './uploading-photo.js';
-// import { renderSortedPosts } from './photo-filter.js';
-// renderSortedPosts();

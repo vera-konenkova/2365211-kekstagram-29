@@ -23,7 +23,6 @@ const onSendFail = () => {
   uploadButton.disabled = false;
 };
 
-
 const onDocumentKeydown = (evt) => {
   if(evt.key === 'Escape' && !evt.target.closest('.text__hashtags') &&
 !evt.target.closest('.text__description')) {
