@@ -1,6 +1,7 @@
 import {renderThumbnails} from '/js/thumbnail.js';
 import {datas} from '/js/api.js';
-import {createRandomPosts, showAlert, debounce} from '/js/util.js';
+import {createRandomPosts, debounce} from '/js/util.js';
+import { showErrorMessage } from './form-messages.js';
 
 const RERENDER_DELAY = 500;
 
@@ -48,7 +49,7 @@ const renderPosts = () => {
   try {
     renderThumbnails(array);
   } catch (err) {
-    showAlert(err.message);
+    showErrorMessage(err.message);
   }
 };
 

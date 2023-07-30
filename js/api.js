@@ -1,6 +1,6 @@
 // Получение данных
 import { showErrorMessage } from './form-messages.js';
-//import {showAlert} from './util.js';
+
 const URL = 'https://29.javascript.pages.academy/kekstagram';
 
 const Route = {

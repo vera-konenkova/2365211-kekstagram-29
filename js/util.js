@@ -1,28 +1,4 @@
-const ALERT_SHOW_TIME = 5000;
 const FILTER_SHOW_PHOTO = 10;
-
-// Показываем ошибку
-function showAlert (message) {
-  const alert = document.createElement('div');
-  alert.style.top = '50%';
-  alert.style.left = '50%';
-  alert.style.position = 'fix';
-  //alert.style.zIndex = '100';
-  //alert.style.top = '0';
-  //alert.style.align = 'center';
-  alert.style.padding = '10px 3px';
-  alert.style.fontSize = '24px';
-  alert.style.style = 'bold';
-  alert.style.textAlign = 'center';
-  alert.style.color = 'red';
-  alert.style.background = 'yellow';
-  alert.textContent = message;
-  document.body.append(alert);
-
-  setTimeout(() => {
-    alert.remove();
-  }, ALERT_SHOW_TIME);
-}
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -30,7 +6,6 @@ const getRandomInteger = (a, b) => {
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
-
 
 // Генерация массива из FILTER_SHOW_PHOTO (10) неповторяющихся чисел
 const generateArrayUniqueNumbers = (a, b) => {
@@ -100,4 +75,4 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 const pressEscButton = (evt) => evt.key === 'Escape';
 // Проверка, является ли нажатая кнопка Esc
 
-export {getRandomInteger, getRandomNumber, getRandomArrayElement, pressEscButton, debounce, showAlert, createRandomPosts};
+export {getRandomInteger, getRandomNumber, getRandomArrayElement, pressEscButton, debounce, createRandomPosts};
