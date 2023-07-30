@@ -27,7 +27,6 @@ const onDocumentKeydown = (evt) => {
   if(evt.key === 'Escape' && !evt.target.closest('.text__hashtags') &&
 !evt.target.closest('.text__description')) {
     evt.preventDefault();
-    hideForm();
   }
 
 };
