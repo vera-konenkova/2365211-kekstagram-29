@@ -1,8 +1,12 @@
 import {addValidator, resetPristine, validatePristine} from './form-validate.js';
 import {changeOriginalEffect, onEffectListChange, iniSlider} from './filters.js';
 import {getData} from './api.js';
-import {changeScaleffect} from './scale.js';
 import {showSuccessMessage, showErrorMessage} from './form-messages.js';
+
+const SCALE_STEP = 25;
+const MIN_VALUE = 25;
+const MAX_VALUE = 100;
+const PERCENT_DIVIDER = 100;
 const URL = 'https://28.javascript.pages.academy/kekstagram';
 
 const form = document.querySelector('.img-upload__form');
@@ -12,6 +16,41 @@ const cancelButton = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
 const effectsList = document.querySelector('.effects__list');
 const sliderElement = document.querySelector('.img-upload__effect-level');
+const minusButton = document.querySelector('.scale__control--smaller');
+const plusButton = document.querySelector('.scale__control--bigger');
+const scaleControl = document.querySelector('.scale__control--value');
+const uploadPreview = document.querySelector('.img-upload__preview');
+const preview = uploadPreview .querySelector('img');
+
+let scaleNumber;
+
+// Получаем число из строки
+const getScaleImage = (scaleString) => parseInt(scaleString.value, 10);
+
+// Уменьшение изображения
+const onMinusButtonClick = () => {
+  scaleNumber = getScaleImage(scaleControl);
+  if (scaleNumber > MIN_VALUE) {
+    scaleControl.value = `${scaleNumber - SCALE_STEP}%`;
+    preview.style.transform = `scale(${(scaleNumber - SCALE_STEP) / PERCENT_DIVIDER})`;
+  }
+};
+
+// Увеличение изображения
+const onPlusButtonClick = () => {
+  scaleNumber = getScaleImage(scaleControl);
+  if (scaleNumber < MAX_VALUE) {
+    scaleControl.value = `${scaleNumber + SCALE_STEP}%`;
+    preview.style.transform = `scale(${(scaleNumber + SCALE_STEP) / 100})`;
+  }
+};
+
+
+const resetScale = () => getScaleImage(scaleControl.value);
+
+const changeScaleffect = () => {
+  preview.style.transform = '';
+};
 
 const onSendSuccess = () => {
   showSuccessMessage();
@@ -36,20 +75,23 @@ const showForm = () => {
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
   iniSlider();
+  minusButton.addEventListener('click', onMinusButtonClick);
+  plusButton.addEventListener('click', onPlusButtonClick);
   changeOriginalEffect();
-
   effectsList.addEventListener('change', (onEffectListChange));
 };
 
 function hideForm() {
-  form.reset();
-  effectsList.removeEventListener('change', onEffectListChange);
-  resetPristine();
-  changeScaleffect();
-  sliderElement.noUiSlider.destroy();
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+  minusButton.removeEventListener('click', onMinusButtonClick);
+  plusButton.removeEventListener('click', onPlusButtonClick);
+  effectsList.removeEventListener('change', onEffectListChange);
+  sliderElement.noUiSlider.destroy();
+  form.reset();
+  resetPristine();
+  changeScaleffect();
 }
 
 const onCancelButtonclick = () => hideForm();
@@ -70,4 +112,4 @@ const addFormChange = () => {
   addValidator();
 };
 
-export {addFormChange, hideForm};
+export {addFormChange, hideForm, resetScale};

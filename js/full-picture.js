@@ -1,5 +1,4 @@
 import { datas } from './api.js';
-import './photo-filter.js';
 
 const COMMENT_PORTION = 5;
 let comments = [];
