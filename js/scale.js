@@ -38,10 +38,7 @@ plusButton.addEventListener('click', onPlusButtonClick);
 const resetScale = () => getScaleImage(scaleControl.value);
 
 const changeScaleffect = () => {
-
   uploadPreview.style.transform = '';
-
-  sliderConteiner.classList.add('hidden');
 
 };
 

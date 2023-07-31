@@ -11,7 +11,7 @@ const effectLevelValue = document.querySelector('.effect-level__value');
 
 // При изменении уровня интенсивности эффекта, CSS-стили картинки внутри .img-upload__preview обновляются
 
-const imagePreview = document.querySelector('.img-upload__preview img');
+const imagePreview = document.querySelector('.img-upload__preview');
 
 // Создаем слайдер
 const iniSlider = () => {

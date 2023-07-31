@@ -45,7 +45,7 @@ function hideForm() {
   form.reset();
   effectsList.removeEventListener('change', onEffectListChange);
   resetPristine();
-  //changeScaleffect();
+  changeScaleffect();
   sliderElement.noUiSlider.destroy();
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
