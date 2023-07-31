@@ -1,4 +1,25 @@
 const FILTER_SHOW_PHOTO = 10;
+const ALERT_SHOW_TIME = 6000;
+
+// Показываем ошибку
+const notice = document.createElement('div');
+notice.style.position = 'fixed';
+const showAlert = (message) => {
+  //notice.style.zIndex = '100';
+  notice.style.top = '60%';
+  notice.style.left= '30%';
+  notice.style.padding = '10px 5px';
+  notice.style.fontSize = '30px';
+  notice.style.textAlign = 'center';
+  notice.style.background = 'red';
+  notice.style.color = 'yellow';
+  notice.textContent = message;
+  document.body.append(notice);
+
+  setTimeout (() => {
+    notice.remove();
+  }, ALERT_SHOW_TIME);
+};
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -61,4 +82,4 @@ function debounce (callback, timeoutDelay = 500) {
 const pressEscButton = (evt) => evt.key === 'Escape';
 // Проверка, является ли нажатая кнопка Esc
 
-export {getRandomInteger, pressEscButton, debounce, createRandomPosts};
+export {getRandomInteger, pressEscButton, debounce, createRandomPosts, showAlert};
