@@ -2,6 +2,7 @@ import {addValidator, resetPristine, validatePristine} from './form-validate.js'
 import {changeOriginalEffect, onEffectListChange, iniSlider} from './filters.js';
 import {getData} from './api.js';
 import {showSuccessMessage, showErrorMessage} from './form-messages.js';
+import {pressEscButton} from './util.js'
 
 const SCALE_STEP = 25;
 const MIN_VALUE = 25;
@@ -63,12 +64,18 @@ const onSendFail = () => {
   uploadButton.disabled = false;
 };
 
-const onDocumentKeydown = (evt) => {
-  if(evt.key === 'Escape' && !evt.target.closest('.text__hashtags') &&
-!evt.target.closest('.text__description')) {
-    evt.preventDefault();
-  }
+// const onDocumentKeydown = (evt) => {
+//   if(evt.key === 'Escape' && !evt.target.closest('.text__hashtags') &&
+// !evt.target.closest('.text__description')) {
+//     evt.preventDefault();
+//   }
+// };
 
+const onDocumentKeydown = (evt) => {
+  if (pressEscButton(evt)) {
+    evt.preventDefault();
+    hideForm();
+  };
 };
 const showForm = () => {
   overlay.classList.remove('hidden');
