@@ -1,6 +1,7 @@
 import {addValidator, resetPristine, validatePristine} from './form-validate.js';
 import {changeOriginalEffect, onEffectListChange, iniSlider} from './filters.js';
 import {getData} from './api.js';
+import {changeScaleffect} from './scale.js';
 import {showSuccessMessage, showErrorMessage} from './form-messages.js';
 const URL = 'https://28.javascript.pages.academy/kekstagram';
 
@@ -36,14 +37,15 @@ const showForm = () => {
   document.addEventListener('keydown', onDocumentKeydown);
   iniSlider();
   changeOriginalEffect();
+
   effectsList.addEventListener('change', (onEffectListChange));
 };
 
 function hideForm() {
   form.reset();
   effectsList.removeEventListener('change', onEffectListChange);
-  form.reset();
   resetPristine();
+  //changeScaleffect();
   sliderElement.noUiSlider.destroy();
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');

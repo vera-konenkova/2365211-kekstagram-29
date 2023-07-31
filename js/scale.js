@@ -6,7 +6,7 @@ const PERCENT_DIVIDER = 100;
 const minusButton = document.querySelector('.scale__control--smaller');
 const plusButton = document.querySelector('.scale__control--bigger');
 const scaleControl = document.querySelector('.scale__control--value');
-const uploadPreview = document.querySelector('.img-upload__preview');
+const uploadPreview = document.querySelector('.img-upload__preview img');
 
 let scaleNumber;
 
@@ -37,4 +37,12 @@ plusButton.addEventListener('click', onPlusButtonClick);
 
 const resetScale = () => getScaleImage(scaleControl.value);
 
-export {resetScale};
+const changeScaleffect = () => {
+
+  uploadPreview.style.transform = '';
+
+  sliderConteiner.classList.add('hidden');
+
+};
+
+export {resetScale, changeScaleffect};
