@@ -4,7 +4,6 @@ import { pressEscButton } from './util.js';
 import { pristine, uploadForm } from './form-validate.js';
 import { sendData } from './api.js';
 import { hideForm, onDocumentKeydown } from './form.js';
-// import { showAlert } from './util.js';
 
 
 const ButtonClass = {
@@ -38,7 +37,7 @@ const showMessage = (message, buttonMessage) => {
   document.addEventListener('click', onBodyClick);
   // Если переданное в функцию - сообщение об ошибке, то удаляем обработчик закрытия по ECS у самой формы
   if (message === errorMessage) {
-    window.removeEventListener('keydown', onDocumentKeydown);
+    document.removeEventListener('keydown', onDocumentKeydown);
   }
 };
 
@@ -86,7 +85,7 @@ const sendDataSuccess = async (data) => {
 };
 
 // Отправка формы или показ ошибки (проверка валидации, показ соответствующего окна, сбор информации с формы в formData)
-  uploadForm.addEventListener('submit', async (evt) => {
+uploadForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
   if (isValid) {

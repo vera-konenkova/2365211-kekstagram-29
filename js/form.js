@@ -1,8 +1,5 @@
-import {addValidator, resetPristine, validatePristine} from './form-validate.js';
+import {addValidator, resetPristine} from './form-validate.js';
 import {changeOriginalEffect, onEffectListChange, iniSlider} from './filters.js';
-import {getData} from './api.js';
-import {showSuccessMessage, showErrorMessage} from './form-messages.js';
-//import {pressEscButton} from './util.js';
 
 const SCALE_STEP = 25;
 const MIN_VALUE = 25;
@@ -10,21 +7,18 @@ const MAX_VALUE = 100;
 const PERCENT_DIVIDER = 100;
 const SCALEVALUE = 10;
 
-const URL = 'https://28.javascript.pages.academy/kekstagram';
-
 const form = document.querySelector('.img-upload__form');
 const imageUploadInput = document.querySelector('.img-upload__input');
-const uploadButton = document.querySelector('.img-upload__submit');
 
 const overlay = document.querySelector('.img-upload__overlay');
 const cancelButton = document.querySelector('.img-upload__cancel');
 const effectsList = document.querySelector('.effects__list');
-const sliderElement = document.querySelector('.img-upload__effect-level');
+const sliderElement = document.querySelector('.effect-level__slider');
 const minusButton = document.querySelector('.scale__control--smaller');
 const plusButton = document.querySelector('.scale__control--bigger');
 const scaleControl = document.querySelector('.scale__control--value');
 const uploadPreview = document.querySelector('.img-upload__preview');
-const preview = uploadPreview .querySelector('img');
+const preview = uploadPreview.querySelector('img');
 
 let scaleNumber;
 
@@ -53,17 +47,6 @@ const resetScale = () => getScaleImage(scaleControl.value);
 
 const changeScaleffect = () => {
   preview.style.transform = '';
-};
-
-const onSendSuccess = () => {
-  showSuccessMessage();
-  hideForm();
-  uploadButton.disabled = false;
-};
-
-const onSendFail = () => {
-  showErrorMessage();
-  uploadButton.disabled = false;
 };
 
 const onDocumentKeydown = (evt) => {
@@ -102,20 +85,10 @@ function hideForm() {
 const onCancelButtonclick = () => hideForm();
 const onFileInputChange = () => showForm();
 
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  if (validatePristine()) {
-    uploadButton.disabled = true;
-    getData(URL, onSendSuccess, onSendFail, new FormData(evt.target));
-  }
-};
-
 const addFormChange = () => {
   imageUploadInput.addEventListener('change', onFileInputChange);
   cancelButton.addEventListener('click', onCancelButtonclick);
-  form.addEventListener('submit', onFormSubmit);
   addValidator();
-
 };
 
 export {addFormChange, hideForm, resetScale, onDocumentKeydown};

@@ -1,9 +1,15 @@
 import {renderThumbnails} from '/js/thumbnail.js';
-import {datas} from '/js/api.js';
 import {createRandomPosts, debounce} from '/js/util.js';
-import { showErrorMessage } from './form-messages.js';
 
 const RERENDER_DELAY = 500;
+let localData;
+
+// Объект с вариантами сортировки постов
+const SortOptions = {
+  localData: 'filter-default',
+  randomData: 'filter-random',
+  discussedData: 'filter-discussed',
+};
 
 // Секция с фильтрами
 
@@ -19,37 +25,35 @@ let randomData;
 // <По умолчанию — фотографии в изначальном порядке с сервера(datas)
 // <Случайные — 10 случайных, не повторяющихся фотографий>
 const createRandomData = () => {
-  if (datas !== undefined) {
-    randomData = createRandomPosts(datas);
+  if (localData !== undefined) {
+    randomData = createRandomPosts(localData);
   }
   return randomData;
 };
-randomData = createRandomData();
 
 // <Обсуждаемые — фотографии, отсортированные в порядке убывания количества комментариев>
 const createDiscussedData = () => {
-  if (datas !== undefined) {
+  if (localData !== undefined) {
     const comparePosts = (postA, postB) => postB.comments.length - postA.comments.length;
     // Показываем сначала посты с большим количеством комметариев
-    discussedData = datas.slice().sort(comparePosts);
+    discussedData = localData.slice().sort(comparePosts);
   }
   return discussedData;
 };
-discussedData = createDiscussedData();
-
-// Объект с вариантами сортировки постов
-const SortOptions = {
-  'filter-default': datas,
-  'filter-random': randomData,
-  'filter-discussed': discussedData,
-};
 
 const renderPosts = () => {
-  const array = SortOptions[currentFilter];
-  try {
-    renderThumbnails(array);
-  } catch (err) {
-    showErrorMessage(err.message);
+  switch (currentFilter) {
+    case SortOptions.localData:
+      renderThumbnails(localData);
+      break;
+    case SortOptions.discussedData:
+      createDiscussedData();
+      renderThumbnails(discussedData);
+      break;
+    case SortOptions.randomData:
+      createRandomData();
+      renderThumbnails(randomData);
+      break;
   }
 };
 
@@ -59,9 +63,10 @@ const renderDebounce = debounce(() => {
   renderPosts();
 }, RERENDER_DELAY);
 
-const renderSortedPosts = () => {
-  renderPosts(currentFilter);
-  if (datas !== undefined) {
+const renderSortedPosts = (data) => {
+  localData = data;
+  renderPosts();
+  if (localData !== undefined) {
     imgFilters.classList.remove('img-filters--inactive');
   }
   imgFilters.addEventListener('click', (evt) => {
@@ -71,7 +76,7 @@ const renderSortedPosts = () => {
     imgFilters.querySelector('.img-filters__button--active').classList.remove('img-filters__button--active');
     evt.target.classList.add('img-filters__button--active');
     currentFilter = evt.target.id;
-    renderDebounce(currentFilter);
+    renderDebounce();
   });
 };
 

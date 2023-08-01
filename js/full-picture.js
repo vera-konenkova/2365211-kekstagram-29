@@ -1,5 +1,3 @@
-import { datas } from './api.js';
-
 const COMMENT_PORTION = 5;
 let comments = [];
 
@@ -21,8 +19,6 @@ const createComment = ({avatar, name, message}) => {
 let commentsShown = 0;
 
 const renderComments = () => {
-  commentListElement.innerHTML = '' ;
-
   const commentPortion = comments.slice(commentsShown , COMMENT_PORTION + commentsShown);
   commentsShown += COMMENT_PORTION;
 
@@ -35,10 +31,10 @@ const renderComments = () => {
 
   if (comments.length <= COMMENT_PORTION || comments.length <= commentsShown) {
     commentsLoaderElement.classList.add('hidden');
-    commentCount.textContent = `${comments.length} из ${comments.length} комментариев `;
+    commentCount.innerHTML = `${comments.length} из <span class="comments-count">${comments.length}</span> комментариев`;
   } else {
     commentsLoaderElement.classList.remove('hidden');
-    commentCount.textContent = `${commentsShown} из ${comments.length} комментариев `;
+    commentCount.innerHTML = `${commentsShown} из <span class="comments-count">${comments.length}</span> комментариев`;
   }
 };
 
@@ -47,7 +43,7 @@ const hideBigPicture = () => {
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
   commentsShown = 0;
-  commentListElement.innerHTML = '' ;
+  commentListElement.innerHTML = '';
 };
 
 const onCommentsLoadClick = () => renderComments();
@@ -74,7 +70,7 @@ const showBigPicture = (data) => {
   document.addEventListener('keydown', onDocumentKeydown);
   renderPictureDetails(data);
   comments = data.comments;
-  commentListElement.innerHTML = '' ;
+  commentListElement.innerHTML = '';
   commentsShown = 0;
 
   renderComments();
@@ -99,13 +95,10 @@ const findPicture = (listOfPhoto) => {
     const picture = listOfPhoto.find(
       (item) => item.id === +thumbnail.dataset.thumbnailId
     );
-    commentListElement.innerHTML = '' ;
-    //commentsShown = 0;
+    commentListElement.innerHTML = '';
 
     showBigPicture(picture);
   });
 };
 
-const pictures = datas;
-
-export { pictures, findPicture};
+export { findPicture };
