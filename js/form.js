@@ -2,7 +2,7 @@ import {addValidator, resetPristine, validatePristine} from './form-validate.js'
 import {changeOriginalEffect, onEffectListChange, iniSlider} from './filters.js';
 import {getData} from './api.js';
 //import {showSuccessMessage, showErrorMessage} from './form-messages.js';
-import {pressEscButton} from './util.js'
+import {pressEscButton} from './util.js';
 
 const SCALE_STEP = 25;
 const MIN_VALUE = 25;
@@ -107,18 +107,18 @@ function hideForm() {
 const onCancelButtonclick = () => hideForm();
 const onFileInputChange = () => showForm();
 
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  if (validatePristine()) {
-    uploadButton.disabled = true;
-    getData(URL, onSendSuccess, onSendFail, new FormData(evt.target));
-  }
-};
+// const onFormSubmit = (evt) => {
+//   evt.preventDefault();
+//   if (validatePristine()) {
+//     uploadButton.disabled = true;
+//     getData(URL, onSendSuccess, onSendFail, new FormData(evt.target));
+//   }
+// };
 
 const addFormChange = () => {
   imageUploadInput.addEventListener('change', onFileInputChange);
   cancelButton.addEventListener('click', onCancelButtonclick);
-  form.addEventListener('submit', onFormSubmit);
+  //form.addEventListener('submit', onFormSubmit);
   addValidator();
 };
 
