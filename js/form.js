@@ -11,9 +11,11 @@ const PERCENT_DIVIDER = 100;
 const URL = 'https://28.javascript.pages.academy/kekstagram';
 
 const form = document.querySelector('.img-upload__form');
+const imageUploadInput = document.querySelector('.img-upload__input');
 const uploadButton = document.querySelector('.img-upload__submit');
+
 const overlay = document.querySelector('.img-upload__overlay');
-const cancelButton = document.querySelector('#upload-cancel');
+const cancelButton = document.querySelector('.img-upload__cancel');
 const fileField = document.querySelector('#upload-file');
 const effectsList = document.querySelector('.effects__list');
 const sliderElement = document.querySelector('.img-upload__effect-level');
@@ -99,6 +101,7 @@ function hideForm() {
   form.reset();
   resetPristine();
   changeScaleffect();
+  uploadPreview.style.transform = '';
 }
 
 const onCancelButtonclick = () => hideForm();
@@ -113,7 +116,7 @@ const onFormSubmit = (evt) => {
 };
 
 const addFormChange = () => {
-  fileField.addEventListener('change', onFileInputChange);
+  imageUploadInput.addEventListener('change', onFileInputChange);
   cancelButton.addEventListener('click', onCancelButtonclick);
   form.addEventListener('submit', onFormSubmit);
   addValidator();
