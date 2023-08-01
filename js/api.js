@@ -1,8 +1,5 @@
 // Получение данных
-//import { showErrorMessage } from './form-messages.js';
-
-import { showAlert } from './util.js';
-
+import {showAlert} from './util.js';
 const URL = 'https://29.javascript.pages.academy/kekstagram';
 
 const Route = {
@@ -29,7 +26,7 @@ const load = async (route, errorText, method = Method.GET, body = null) => {
     return response.json();
   } catch {
     showAlert(errorText);
-    throw new Error();
+    throw new Error(errorText);
   }
 };
 
