@@ -1,7 +1,7 @@
 import {addValidator, resetPristine, validatePristine} from './form-validate.js';
 import {changeOriginalEffect, onEffectListChange, iniSlider} from './filters.js';
 import {getData} from './api.js';
-import {showSuccessMessage, showErrorMessage} from './form-messages.js';
+//import {showSuccessMessage, showErrorMessage} from './form-messages.js';
 import {pressEscButton} from './util.js'
 
 const SCALE_STEP = 25;
@@ -55,16 +55,16 @@ const changeScaleffect = () => {
   preview.style.transform = '';
 };
 
-const onSendSuccess = () => {
-  showSuccessMessage();
-  hideForm();
-  uploadButton.disabled = false;
-};
+// const onSendSuccess = () => {
+//   showSuccessMessage();
+//   hideForm();
+//   uploadButton.disabled = false;
+// };
 
-const onSendFail = () => {
-  showErrorMessage();
-  uploadButton.disabled = false;
-};
+// const onSendFail = () => {
+//   showErrorMessage();
+//   uploadButton.disabled = false;
+// };
 
 // const onDocumentKeydown = (evt) => {
 //   if(evt.key === 'Escape' && !evt.target.closest('.text__hashtags') &&
