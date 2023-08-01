@@ -16,7 +16,6 @@ const uploadButton = document.querySelector('.img-upload__submit');
 
 const overlay = document.querySelector('.img-upload__overlay');
 const cancelButton = document.querySelector('.img-upload__cancel');
-const fileField = document.querySelector('#upload-file');
 const effectsList = document.querySelector('.effects__list');
 const sliderElement = document.querySelector('.img-upload__effect-level');
 const minusButton = document.querySelector('.scale__control--smaller');
@@ -44,10 +43,9 @@ const onPlusButtonClick = () => {
   scaleNumber = getScaleImage(scaleControl);
   if (scaleNumber < MAX_VALUE) {
     scaleControl.value = `${scaleNumber + SCALE_STEP}%`;
-    preview.style.transform = `scale(${(scaleNumber + SCALE_STEP) / 100})`;
+    preview.style.transform = `scale(${(scaleNumber + SCALE_STEP) / PERCENT_DIVIDER})`;
   }
 };
-
 
 const resetScale = () => getScaleImage(scaleControl.value);
 
