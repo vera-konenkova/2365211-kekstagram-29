@@ -8,6 +8,8 @@ const SCALE_STEP = 25;
 const MIN_VALUE = 25;
 const MAX_VALUE = 100;
 const PERCENT_DIVIDER = 100;
+const SCALEVALUE = 10;
+
 const URL = 'https://28.javascript.pages.academy/kekstagram';
 
 const form = document.querySelector('.img-upload__form');
@@ -27,7 +29,7 @@ const preview = uploadPreview .querySelector('img');
 let scaleNumber;
 
 // Получаем число из строки
-const getScaleImage = (scaleString) => parseInt(scaleString.value, 10);
+const getScaleImage = (scaleString) => parseInt(scaleString.value, SCALEVALUE);
 
 // Уменьшение изображения
 const onMinusButtonClick = () => {
