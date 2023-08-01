@@ -10,7 +10,7 @@ const imagePreview = document.querySelector('.img-upload__preview');
 const preview = imagePreview.querySelector('img');
 
 // Создаем слайдер
-const iniSlider () => {noUiSlider.create(sliderElement, {
+const iniSlider = () => {noUiSlider.create(sliderElement, {
   range: {
     min: 0,
     max: 1,
@@ -123,9 +123,5 @@ const onEffectListChange = (evt) => {
   changeSlider(opts);
   changeValueEffect(effectName, unitMeasurement);
 };
-
-export {changeOriginalEffect, onEffectListChange};
-
-
 
 export {changeOriginalEffect, onEffectListChange, iniSlider};
