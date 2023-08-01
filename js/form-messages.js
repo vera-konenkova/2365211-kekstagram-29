@@ -1,8 +1,7 @@
 // Показывает сообщения после отправки формы
-import { pressEscButton } from './util.js';
 import { pristine, uploadForm } from './form-validate.js';
 import { sendData } from './api.js';
-import { hideForm } from './form.js';
+import { hideForm, onDocumentKeydown } from './form.js';
 
 const successMessage = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
 const errorMessage = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
@@ -16,7 +15,7 @@ const ButtonClass = {
 const closeMessage = () => {
   const messages = document.querySelector('.error') || document.querySelector('.success');
   messages.remove();
-  window.removeEventListener('keydown', onDocumentKeydownEsc);
+  window.removeEventListener('keydown', onDocumentKeydown);
   document.removeEventListener('click', onBodyClick);
   // Если сообщение об ошибке закрыто, то возвращаем обработчик закрытия по ESC на саму форму
   window.addEventListener('keydown', onDocumentKeydown);
@@ -31,7 +30,7 @@ const showMessage = (message, buttonMessage) => {
   // Сообщение должно исчезать после нажатия на кнопку
   message.querySelector(buttonMessage).addEventListener('click', onCloseButtonClick);
   // Сообщение должно исчезать по нажатию на клавишу Esc
-  window.addEventListener('keydown', onDocumentKeydownEsc);
+  window.addEventListener('keydown', onDocumentKeydown);
   // Сообщение должно исчезать по клику на произвольную область экрана за пределами блока с сообщением
   document.addEventListener('click', onBodyClick);
   // Если переданное в функцию - сообщение об ошибке, то удаляем обработчик закрытия по ECS у самой формы
@@ -42,12 +41,12 @@ const showMessage = (message, buttonMessage) => {
 
 // Функция закрытия сообщения формы по кнопке ESС
 // А onDocumentKeydown это функция закрытия самой формы по кнопке ESC
-function onDocumentKeydownEsc(evt) {
-  if (pressEscButton(evt)) {
-    evt.preventDefault();
-    closeMessage();
-  }
-}
+// function onDocumentKeydownEsc(evt) {
+//   if (pressEscButton(evt)) {
+//     evt.preventDefault();
+//     closeMessage();
+//   }
+// }
 
 // Определяем был ли клик за пределами блока с сообщением
 function onBodyClick (evt) {

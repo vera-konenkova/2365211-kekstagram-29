@@ -122,4 +122,4 @@ const addFormChange = () => {
   addValidator();
 };
 
-export {addFormChange, hideForm, resetScale};
+export {addFormChange, hideForm, resetScale, onDocumentKeydown};
