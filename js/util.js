@@ -7,7 +7,7 @@ notice.style.position = 'fixed';
 const showAlert = (message) => {
   //notice.style.zIndex = '100';
   notice.style.top = '60%';
-  notice.style.left= '30%';
+  notice.style.left = '30%';
   notice.style.padding = '10px 5px';
   notice.style.fontSize = '30px';
   notice.style.textAlign = 'center';

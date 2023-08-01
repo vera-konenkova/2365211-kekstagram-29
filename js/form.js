@@ -1,8 +1,8 @@
 import {addValidator, resetPristine, validatePristine} from './form-validate.js';
 import {changeOriginalEffect, onEffectListChange, iniSlider} from './filters.js';
 import {getData} from './api.js';
-//import {showSuccessMessage, showErrorMessage} from './form-messages.js';
-import {pressEscButton} from './util.js';
+import {showSuccessMessage, showErrorMessage} from './form-messages.js';
+//import {pressEscButton} from './util.js';
 
 const SCALE_STEP = 25;
 const MIN_VALUE = 25;
@@ -55,30 +55,25 @@ const changeScaleffect = () => {
   preview.style.transform = '';
 };
 
-// const onSendSuccess = () => {
-//   showSuccessMessage();
-//   hideForm();
-//   uploadButton.disabled = false;
-// };
+const onSendSuccess = () => {
+  showSuccessMessage();
+  hideForm();
+  uploadButton.disabled = false;
+};
 
-// const onSendFail = () => {
-//   showErrorMessage();
-//   uploadButton.disabled = false;
-// };
-
-// const onDocumentKeydown = (evt) => {
-//   if(evt.key === 'Escape' && !evt.target.closest('.text__hashtags') &&
-// !evt.target.closest('.text__description')) {
-//     evt.preventDefault();
-//   }
-// };
+const onSendFail = () => {
+  showErrorMessage();
+  uploadButton.disabled = false;
+};
 
 const onDocumentKeydown = (evt) => {
-  if (pressEscButton(evt)) {
+  if (evt.key === 'Escape' && !evt.target.closest('.text__hashtags') &&
+  !evt.target.closest('.text__description')) {
     evt.preventDefault();
     hideForm();
-  };
+  }
 };
+
 const showForm = () => {
   overlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
@@ -107,19 +102,20 @@ function hideForm() {
 const onCancelButtonclick = () => hideForm();
 const onFileInputChange = () => showForm();
 
-// const onFormSubmit = (evt) => {
-//   evt.preventDefault();
-//   if (validatePristine()) {
-//     uploadButton.disabled = true;
-//     getData(URL, onSendSuccess, onSendFail, new FormData(evt.target));
-//   }
-// };
+const onFormSubmit = (evt) => {
+  evt.preventDefault();
+  if (validatePristine()) {
+    uploadButton.disabled = true;
+    getData(URL, onSendSuccess, onSendFail, new FormData(evt.target));
+  }
+};
 
 const addFormChange = () => {
   imageUploadInput.addEventListener('change', onFileInputChange);
   cancelButton.addEventListener('click', onCancelButtonclick);
-  //form.addEventListener('submit', onFormSubmit);
+  form.addEventListener('submit', onFormSubmit);
   addValidator();
+
 };
 
 export {addFormChange, hideForm, resetScale, onDocumentKeydown};
