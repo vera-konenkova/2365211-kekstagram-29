@@ -1,26 +1,29 @@
+
 // Показывает сообщения после отправки формы
+import { pressEscButton } from './util.js';
 import { pristine, uploadForm } from './form-validate.js';
 import { sendData } from './api.js';
 import { hideForm, onDocumentKeydown } from './form.js';
+// import { showAlert } from './util.js';
 
-const successMessage = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
-const errorMessage = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
-const uploadButton = document.querySelector('.img-upload__submit');
 
 const ButtonClass = {
   ERROR: '.error__button',
   SUCCESS: '.success__button',
 };
 
+const successMessage = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
+const errorMessage = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
+const uploadButton = document.querySelector('.img-upload__submit');
+
 const closeMessage = () => {
   const messages = document.querySelector('.error') || document.querySelector('.success');
   messages.remove();
-  window.removeEventListener('keydown', onDocumentKeydown);
+  window.removeEventListener('keydown', onDocumentKeydownEsc);
   document.removeEventListener('click', onBodyClick);
   // Если сообщение об ошибке закрыто, то возвращаем обработчик закрытия по ESC на саму форму
   window.addEventListener('keydown', onDocumentKeydown);
 };
-
 const onCloseButtonClick = () => closeMessage();
 
 // Показываем сообщение после отправки формы
@@ -30,7 +33,7 @@ const showMessage = (message, buttonMessage) => {
   // Сообщение должно исчезать после нажатия на кнопку
   message.querySelector(buttonMessage).addEventListener('click', onCloseButtonClick);
   // Сообщение должно исчезать по нажатию на клавишу Esc
-  window.addEventListener('keydown', onDocumentKeydown);
+  window.addEventListener('keydown', onDocumentKeydownEsc);
   // Сообщение должно исчезать по клику на произвольную область экрана за пределами блока с сообщением
   document.addEventListener('click', onBodyClick);
   // Если переданное в функцию - сообщение об ошибке, то удаляем обработчик закрытия по ECS у самой формы
@@ -41,12 +44,12 @@ const showMessage = (message, buttonMessage) => {
 
 // Функция закрытия сообщения формы по кнопке ESС
 // А onDocumentKeydown это функция закрытия самой формы по кнопке ESC
-// function onDocumentKeydownEsc(evt) {
-//   if (pressEscButton(evt)) {
-//     evt.preventDefault();
-//     closeMessage();
-//   }
-// }
+function onDocumentKeydownEsc(evt) {
+  if (pressEscButton(evt)) {
+    evt.preventDefault();
+    closeMessage();
+  }
+}
 
 // Определяем был ли клик за пределами блока с сообщением
 function onBodyClick (evt) {
@@ -82,8 +85,8 @@ const sendDataSuccess = async (data) => {
   }
 };
 
-/// Отправка формы или показ ошибки (проверка валидации, показ соответствующего окна, сбор информации с формы в formData)
-uploadForm.addEventListener('submit', async (evt) => {
+// Отправка формы или показ ошибки (проверка валидации, показ соответствующего окна, сбор информации с формы в formData)
+  uploadForm.addEventListener('submit', async (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
   if (isValid) {

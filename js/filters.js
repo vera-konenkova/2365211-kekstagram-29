@@ -10,7 +10,7 @@ const imagePreview = document.querySelector('.img-upload__preview');
 const preview = imagePreview.querySelector('img');
 
 // Создаем слайдер
-noUiSlider.create(sliderElement, {
+const iniSlider () => {noUiSlider.create(sliderElement, {
   range: {
     min: 0,
     max: 1,
@@ -19,7 +19,7 @@ noUiSlider.create(sliderElement, {
   step: 0.1,
   connect: 'lower',
 });
-
+};
 // Изменяем параметры слайдера
 const changeSlider = (opts) => {
   const {min, max, step, start} = opts;
