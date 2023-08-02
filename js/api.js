@@ -1,5 +1,4 @@
 // Получение данных
-import {showAlert} from './util.js';
 const URL = 'https://29.javascript.pages.academy/kekstagram';
 
 const Route = {
@@ -25,7 +24,7 @@ const load = async (route, errorText, method = Method.GET, body = null) => {
     }
     return response.json();
   } catch {
-    showAlert(errorText);
+    throw new Error(errorText);
   }
 };
 
@@ -33,6 +32,4 @@ const getData = () => load(Route.GET, ErrorText.GET);
 
 const sendData = (body) => load(Route.POST, ErrorText.POST, Method.POST, body);
 
-const datas = await getData();
-
-export {getData, sendData, datas};
+export {getData, sendData};
